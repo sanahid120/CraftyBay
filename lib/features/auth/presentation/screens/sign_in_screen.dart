@@ -1,4 +1,5 @@
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
 import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
@@ -21,7 +22,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -35,22 +35,16 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 Text(
                   "Welcome Back",
-                  style: TextTheme
-                      .of(
+                  style: TextTheme.of(
                     context,
-                  )
-                      .titleLarge
-                      ?.copyWith(fontSize: 36),
+                  ).titleLarge?.copyWith(fontSize: 36),
                 ),
 
                 Text(
                   "Please Enter Your Email and Password to Enter",
-                  style: TextTheme
-                      .of(
+                  style: TextTheme.of(
                     context,
-                  )
-                      .bodyMedium
-                      ?.copyWith(color: Colors.grey),
+                  ).bodyMedium?.copyWith(color: Colors.grey),
                 ),
                 SizedBox(height: 26),
 
@@ -65,9 +59,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           controller: emailController,
                           decoration: InputDecoration(labelText: "Email"),
                           validator: (String? value) {
-                            if (value
-                                ?.trim()
-                                .isEmpty ?? true) {
+                            if (value?.trim().isEmpty ?? true) {
                               return 'Enter your Email';
                             } else if (EmailValidator.validate(value!) ==
                                 false) {
@@ -112,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline
+                                  decoration: TextDecoration.underline,
                                 ),
                                 text: 'SignUp',
                                 recognizer: TapGestureRecognizer()
@@ -121,6 +113,18 @@ class _SignInScreenState extends State<SignInScreen> {
                                   },
                               ),
                             ],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            onForgotPasswordPress(context);
+                          },
+                          child: Text(
+                            "Forget Password?",
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              decorationThickness: 1.5,
+                            ),
                           ),
                         ),
                       ],
@@ -143,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
-
   }
 
+  void onForgotPasswordPress(BuildContext context) {Navigator.pushReplacementNamed(context, VerifyOtp.name);}
 }
