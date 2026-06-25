@@ -4,17 +4,23 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
   static const String name = "/SignInScreen";
 
   @override
-  Widget build(BuildContext context) {
-    final GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
+  State<SignInScreen> createState() => _SignInScreenState();
+}
 
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+class _SignInScreenState extends State<SignInScreen> {
+  final GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
 
     return Scaffold(
       body: SafeArea(
@@ -29,16 +35,22 @@ class SignInScreen extends StatelessWidget {
 
                 Text(
                   "Welcome Back",
-                  style: TextTheme.of(
+                  style: TextTheme
+                      .of(
                     context,
-                  ).titleLarge?.copyWith(fontSize: 36),
+                  )
+                      .titleLarge
+                      ?.copyWith(fontSize: 36),
                 ),
 
                 Text(
                   "Please Enter Your Email and Password to Enter",
-                  style: TextTheme.of(
+                  style: TextTheme
+                      .of(
                     context,
-                  ).bodyMedium?.copyWith(color: Colors.grey),
+                  )
+                      .bodyMedium
+                      ?.copyWith(color: Colors.grey),
                 ),
                 SizedBox(height: 26),
 
@@ -53,7 +65,9 @@ class SignInScreen extends StatelessWidget {
                           controller: emailController,
                           decoration: InputDecoration(labelText: "Email"),
                           validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
+                            if (value
+                                ?.trim()
+                                .isEmpty ?? true) {
                               return 'Enter your Email';
                             } else if (EmailValidator.validate(value!) ==
                                 false) {
@@ -98,6 +112,7 @@ class SignInScreen extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline
                                 ),
                                 text: 'SignUp',
                                 recognizer: TapGestureRecognizer()
@@ -120,5 +135,15 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  void onSignInButton(BuildContext context) => Navigator.pushReplacementNamed(context, SignUpScreen.name);
+  void onSignInButton(BuildContext context) =>
+      Navigator.pushReplacementNamed(context, SignUpScreen.name);
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+
+  }
+
 }
