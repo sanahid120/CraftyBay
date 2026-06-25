@@ -1,4 +1,5 @@
 import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
 import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
@@ -150,7 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                         SizedBox(height: 16),
 
-                        FilledButton(onPressed: () {}, child: Text("Register")),
+                        FilledButton(onPressed: () {onTapSignUpButton(emailController.text.trim());}, child: Text("Register")),
 
                         SizedBox(height: 16),
 
@@ -200,5 +201,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     lastNameController.dispose();
     phoneController.dispose();
     super.dispose();
+  }
+
+  void onTapSignUpButton(String email) {
+    Navigator.pushNamed(context, VerifyOtp.name);
   }
 }
