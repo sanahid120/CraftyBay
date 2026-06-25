@@ -32,23 +32,28 @@ class AppTheme {
 
   static InputDecorationTheme get _inputDecoration {
     return InputDecorationTheme(
+
       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       hintStyle: TextStyle(color: Colors.grey),
+
       border: OutlineInputBorder(
+
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColors.themeColor),
+
+        borderSide: BorderSide(color: AppColors.themeColor,width: 1.5),
       ),
+
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColors.themeColor),
+        borderSide: BorderSide(color: AppColors.themeColor,width: 1.5),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColors.themeColor),
+        borderSide: BorderSide(color: AppColors.focusColor,width: 1.5),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: Colors.red),
+        borderSide: BorderSide(color: Colors.red,width: 1.5),
       ),
     );
   }

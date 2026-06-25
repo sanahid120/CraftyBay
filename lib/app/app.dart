@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiProvider(
       providers: [
 
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
       child: Consumer2<LanguageProvider,ThemeProvider>(
           builder: ( context, languageProvider, themeProvider , child) {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
 
-              title: 'Flutter Firebase',
+              title: 'CraftyBay',
               localizationsDelegates: [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: languageProvider.supportedLocales,
 
               theme: themeProvider.currentTheme,
+
 
 
               initialRoute: '/',
