@@ -1,5 +1,6 @@
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
+import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import '../features/auth/presentation/screens/homepage.dart';
 import '../features/auth/presentation/screens/sign_in_screen.dart';
@@ -25,6 +26,8 @@ class AppRoutes {
       case VerifyOtp.name:
         widget = VerifyOtp();
       break;
+      case HomepageBottomNavBar.name:
+        widget = HomepageBottomNavBar();
     }
 
     return MaterialPageRoute(builder: (context) => widget);

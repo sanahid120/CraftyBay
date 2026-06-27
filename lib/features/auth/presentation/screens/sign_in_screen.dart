@@ -1,3 +1,4 @@
+import 'package:craftybay/features/auth/presentation/screens/homepage.dart';
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
 import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
@@ -90,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                         SizedBox(height: 16),
 
-                        FilledButton(onPressed: () {}, child: Text("login")),
+                        FilledButton(onPressed: () {onLoginButton(context);}, child: Text("login")),
 
                         SizedBox(height: 16),
 
@@ -109,7 +110,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 text: 'SignUp',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    onSignInButton(context);
+                                    onSignUpButton(context);
                                   },
                               ),
                             ],
@@ -139,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void onSignInButton(BuildContext context) =>
+  void onSignUpButton(BuildContext context) =>
       Navigator.pushReplacementNamed(context, SignUpScreen.name);
 
   @override
@@ -150,4 +151,6 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void onForgotPasswordPress(BuildContext context) {Navigator.pushReplacementNamed(context, VerifyOtp.name);}
+
+  void onLoginButton(BuildContext context) {Navigator.pushNamed(context, Homepage.name);}
 }

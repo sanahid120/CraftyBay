@@ -14,7 +14,9 @@ class VerifyOtp extends StatefulWidget {
   State<VerifyOtp> createState() => _VerifyOtpState();
 }
 
+
 class _VerifyOtpState extends State<VerifyOtp> {
+
   final PinInputController otpTEController = PinInputController();
   @override
   Widget build(BuildContext context) {
