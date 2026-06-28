@@ -1,4 +1,5 @@
 import 'package:craftybay/app/app_colors.dart';
+import 'package:craftybay/features/home/presentation/screens/HomeScreen.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class HomepageBottomNavBar extends StatefulWidget {
 
 class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
   final List<Widget> _screens = [
-    SizedBox(),
+    HomeScreen(),
     SizedBox(),
     SizedBox(),
     SizedBox(),
