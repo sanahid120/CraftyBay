@@ -20,7 +20,7 @@ class SectionHeader extends StatelessWidget {
           name,
           style: TextTheme.of(
             context,
-          ).titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          ).titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         TextButton(
           onPressed: onTapSeeAll,
