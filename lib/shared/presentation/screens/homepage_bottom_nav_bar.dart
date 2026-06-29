@@ -1,4 +1,5 @@
 import 'package:craftybay/app/app_colors.dart';
+import 'package:craftybay/features/category/presentaion/screens/category_screen.dart';
 import 'package:craftybay/features/home/presentation/screens/HomeScreen.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class HomepageBottomNavBar extends StatefulWidget {
 class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
   final List<Widget> _screens = [
     HomeScreen(),
-    SizedBox(),
+    CategoryScreen(),
     SizedBox(),
     SizedBox(),
   ];
@@ -30,7 +31,9 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
     return Consumer<HomepageMainNavProvider>(
       builder: (context, mainNavProvider, _) {
         return Scaffold(
-          body: SafeArea(child: _screens[mainNavProvider.selectedIndex]),
+          extendBody: true,
+
+          body: _screens[mainNavProvider.selectedIndex],
 
           bottomNavigationBar: BottomNavigationBar(
             onTap: (int index) {

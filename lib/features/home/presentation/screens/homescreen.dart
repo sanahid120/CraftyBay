@@ -1,6 +1,8 @@
 import 'package:craftybay/app/app_paths.dart';
+import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/appbar_widget.dart';
 import '../widgets/home_carousel_slider.dart';
@@ -41,7 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               HomeCarouselSlider(),
               const SizedBox(height: 16),
-              SectionHeader(name: "All Categories", onTapSeeAll: () {}),
+              SectionHeader(
+                name: "All Categories",
+                onTapSeeAll: () {
+                  context.read<HomepageMainNavProvider>().moveToCategory();
+                },
+              ),
               const SizedBox(height: 16),
               HomeCategoryList(),
               const SizedBox(height: 16),

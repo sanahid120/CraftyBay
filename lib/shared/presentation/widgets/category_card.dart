@@ -11,10 +11,12 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       spacing: 4,
       children: [
         Container(
-          padding: EdgeInsets.all(16),
+
+          padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: AppColors.themeColor.withAlpha(30),
             borderRadius: BorderRadius.circular(8),

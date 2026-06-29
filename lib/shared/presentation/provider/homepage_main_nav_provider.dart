@@ -11,5 +11,12 @@ void updateIndex(int index){
   notifyListeners();
 }
 
-
+void moveToCategory(){
+  updateIndex(1);
 }
+void moveToHomepage(){
+  updateIndex(0);
+}
+}
+
+
