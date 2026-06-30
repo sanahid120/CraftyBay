@@ -14,20 +14,38 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Categories", style: TextStyle(fontSize: 24)),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (_,_){
+        onPressedBackButton();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Categories", style: TextStyle(fontSize: 24)),
 
-        leading: IconButton(
-          onPressed: () {
-            context.read<HomepageMainNavProvider>().moveToHomepage();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
+          leading: IconButton(
+            onPressed:onPressedBackButton,
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+            itemCount: 40,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+            ),
+            itemBuilder: (context, index) {
+              return FittedBox(child: CategoryCard());
+            },
+          ),
         ),
       ),
-
-
-
     );
+  }
+  void onPressedBackButton(){
+    context.read<HomepageMainNavProvider>().moveToHomepage();
   }
 }
