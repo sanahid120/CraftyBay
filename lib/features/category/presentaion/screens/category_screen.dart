@@ -6,7 +6,7 @@ import '../../../../shared/presentation/provider/homepage_main_nav_provider.dart
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
-
+static const String name = "/CategoryScreen";
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
 }

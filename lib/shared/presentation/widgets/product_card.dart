@@ -17,25 +17,28 @@ class ProductCard extends StatelessWidget {
       color: Colors.white,
 
       child: SizedBox(
-        width: 140,
+        width: 150,
+        height: 160,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           spacing: 2,
           children: [
-            Container(
-              width: 140,
-              height: 140,
-              padding: .all(4),
+            Flexible(
+              child: Container(
 
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  topRight: Radius.circular(8),
+                padding: .all(4),
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
+                  color: AppColors.themeColor.withAlpha(30),
                 ),
-                color: AppColors.themeColor.withAlpha(30),
-              ),
-              child: Image.asset(
-                AssetPaths.shoeImage,
-                fit: .scaleDown,
+                child: Image.asset(
+                  AssetPaths.shoeImage,
+                  fit: .scaleDown,
+                ),
               ),
             ),
 
@@ -85,7 +88,7 @@ class ProductCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 4),
+
           ],
         ),
       ),

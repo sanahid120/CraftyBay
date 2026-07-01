@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../features/auth/presentation/screens/homepage.dart';
 import '../features/auth/presentation/screens/sign_in_screen.dart';
 import '../features/auth/presentation/screens/splashScreen.dart';
+import '../features/category/presentaion/screens/category_screen.dart';
+import '../features/products/presentation/screens/product_list_screen.dart';
 
 class AppRoutes {
   static MaterialPageRoute<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -28,6 +30,17 @@ class AppRoutes {
       break;
       case HomepageBottomNavBar.name:
         widget = HomepageBottomNavBar();
+        break;
+      case ProductListScreen.name:
+        final categoryName = settings.arguments as String;
+        widget = ProductListScreen(categoryName: categoryName,);
+        break;
+      case CategoryScreen.name:
+        widget = CategoryScreen();
+        break;
+      default:
+
+
     }
 
     return MaterialPageRoute(builder: (context) => widget);
