@@ -6,6 +6,7 @@ import '../features/auth/presentation/screens/homepage.dart';
 import '../features/auth/presentation/screens/sign_in_screen.dart';
 import '../features/auth/presentation/screens/splashScreen.dart';
 import '../features/category/presentaion/screens/category_screen.dart';
+import '../features/products/presentation/screens/product_details_screen.dart';
 import '../features/products/presentation/screens/product_list_screen.dart';
 
 class AppRoutes {
@@ -37,6 +38,9 @@ class AppRoutes {
         break;
       case CategoryScreen.name:
         widget = CategoryScreen();
+        break;
+      case ProductDetailsScreen.name:
+        widget = ProductDetailsScreen();
         break;
       default:
 

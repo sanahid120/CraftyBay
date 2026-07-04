@@ -5,6 +5,8 @@ import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provide
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../features/wishlist/presentation/screens/wish_list_screen.dart';
+
 class HomepageBottomNavBar extends StatefulWidget {
   const HomepageBottomNavBar({super.key});
   static const String name = "/HomepageBottomNavBar";
@@ -18,7 +20,7 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
     HomeScreen(),
     CategoryScreen(),
     SizedBox(),
-    SizedBox(),
+    WishListScreen(),
   ];
   /*
   IndexedStack(
