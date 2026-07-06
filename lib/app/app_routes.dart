@@ -4,7 +4,7 @@ import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.da
 import 'package:flutter/material.dart';
 import '../features/auth/presentation/screens/homepage.dart';
 import '../features/auth/presentation/screens/sign_in_screen.dart';
-import '../features/auth/presentation/screens/splashScreen.dart';
+import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/category/presentaion/screens/category_screen.dart';
 import '../features/products/presentation/screens/product_details_screen.dart';
 import '../features/products/presentation/screens/product_list_screen.dart';
