@@ -35,14 +35,10 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Expanded(child: Center(child: AppLogo())),
             CircularProgressIndicator(),
-            SizedBox(height: 25,),
-
-
+            SizedBox(height: 25),
           ],
         ),
       ),
     );
   }
 }
-
-

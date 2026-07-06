@@ -1,4 +1,5 @@
 import 'package:craftybay/app/app_colors.dart';
+import 'package:craftybay/features/cart/presentation/screens/cart_screen.dart';
 import 'package:craftybay/features/category/presentaion/screens/category_screen.dart';
 import 'package:craftybay/features/home/presentation/screens/HomeScreen.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
@@ -19,7 +20,7 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
   final List<Widget> _screens = [
     HomeScreen(),
     CategoryScreen(),
-    SizedBox(),
+    CartScreen(),
     WishListScreen(),
   ];
   /*
@@ -33,7 +34,7 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
     return Consumer<HomepageMainNavProvider>(
       builder: (context, mainNavProvider, _) {
         return Scaffold(
-          extendBody: true,
+          extendBody: false,
 
           body: _screens[mainNavProvider.selectedIndex],
 
