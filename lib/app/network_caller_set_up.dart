@@ -6,7 +6,11 @@ import 'app.dart';
 
 NetworkCaller getNetworkCaller() {
   return NetworkCaller(
-    headers: () => {'token': 'content-type: application/json'},
+    headers: () => {
+      'Content-Type': 'application/json',
+      // If you have a token, add it here separately
+      // 'token': 'your_token_here' 
+    },
     onUnauthorize: () {
       logout();
     },
@@ -14,6 +18,8 @@ NetworkCaller getNetworkCaller() {
 }
 
 Future<void> logout() async {
-  Navigator.pushNamedAndRemoveUntil(MyApp.navigatorKey.currentContext!, SignInScreen.name, (route) => false);
+  if (MyApp.navigatorKey.currentContext != null) {
+    Navigator.pushNamedAndRemoveUntil(
+        MyApp.navigatorKey.currentContext!, SignInScreen.name, (route) => false);
+  }
 }
-

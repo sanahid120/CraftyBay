@@ -41,7 +41,8 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           responseCode: response.statusCode,
-          errorMessage: decodedData['msg'], // TODO: Decouple this data variable
+          errorMessage:
+          decodedData['msg'], // TODO: Decouple this data variable
         );
       }
     } catch (e) {
@@ -54,10 +55,10 @@ class NetworkCaller {
   }
 
   Future<NetworkResponse> postRequest(
-    String url, {
-    Map<String, dynamic>? body,
-    bool isFromLogin = false,
-  }) async {
+      String url, {
+        Map<String, dynamic>? body,
+        bool isFromLogin = false,
+      }) async {
     try {
       Uri uri = Uri.parse(url);
 
@@ -105,15 +106,15 @@ class NetworkCaller {
   void _logRequest(String url, {Map<String, dynamic>? body}) {
     _logger.i(
       'URL: $url\n'
-      'Body: $body',
+          'Body: $body',
     );
   }
 
   void _logResponse(String url, Response response) {
     _logger.i(
       'URL: $url\n'
-      'Status Code: ${response.statusCode}\n'
-      'Body: ${response.body}',
+          'Status Code: ${response.statusCode}\n'
+          'Body: ${response.body}',
     );
   }
 }

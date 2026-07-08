@@ -1,3 +1,5 @@
+import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
 import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 5));
 
-    Navigator.pushReplacementNamed(context, HomepageBottomNavBar.name);
+    Navigator.pushReplacementNamed(context, VerifyOtp.name);
   }
 
   @override

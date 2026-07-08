@@ -1,9 +1,15 @@
-import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
-import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
-import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
-import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../shared/presentation/utils/validation.dart';
+import '../../../../shared/presentation/widgets/snackbar_msg.dart';
+import '../../data/models/sign_up_params.dart';
+import '../providers/sign_up_providers.dart';
+import '../widgets/app_logo.dart';
+import 'sign_in_screen.dart';
+import 'verify_otp.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -25,162 +31,158 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController cityController = TextEditingController();
 
+  final SignUpProviders _signUpProviders = SignUpProviders();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                AppLogo(),
+    return ChangeNotifierProvider.value(
+      value: _signUpProviders,
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AppLogo(),
 
-                SizedBox(height: 20),
+                  SizedBox(height: 20),
 
-                Text(
-                  "Join With Us",
-                  style: TextTheme.of(
-                    context,
-                  ).titleLarge?.copyWith(fontSize: 36),
-                ),
+                  Text(
+                    "Join With Us",
+                    style: TextTheme.of(
+                      context,
+                    ).titleLarge?.copyWith(fontSize: 36),
+                  ),
 
-                Text(
-                  "Get started with your details",
-                  style: TextTheme.of(
-                    context,
-                  ).bodyMedium?.copyWith(color: Colors.grey),
-                ),
-                SizedBox(height: 26),
+                  Text(
+                    "Get started with your details",
+                    style: TextTheme.of(
+                      context,
+                    ).bodyMedium?.copyWith(color: Colors.grey),
+                  ),
+                  SizedBox(height: 26),
 
-                Form(
-                  key: signupFormKey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          controller: emailController,
-                          decoration: InputDecoration(labelText: "Email"),
-                          validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return 'Enter your Email';
-                            } else if (EmailValidator.validate(value!) ==
-                                false) {
-                              return 'Enter a valid email address';
-                            }
-                            return null;
-                          },
-                        ),
-
-                        SizedBox(height: 14),
-
-                        TextFormField(
-                          controller: firstNameController,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(labelText: "First Name"),
-
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your First Name';
-                            }
-                            return null;
-                          },
-                        ),
-
-                        SizedBox(height: 14),
-                        TextFormField(
-                          controller: lastNameController,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(labelText: "Last Name"),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your Last Name';
-                            } else if (value!.length < 2) {
-                              return 'your name should contain least of 2 characters';
-                            }
-                            return null;
-                          },
-                        ),
-
-                        SizedBox(height: 14),
-                        TextFormField(
-                          controller: phoneController,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(labelText: "Phone"),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your Phone Number';
-                            }
-                            return null;
-                          },
-                        ),
-
-                        SizedBox(height: 14),
-                        TextFormField(
-                          controller: cityController,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(labelText: "City"),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your City name';
-                            }
-                            return null;
-                          },
-                        ),
-
-                        SizedBox(height: 14),
-
-                        TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          controller: passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(labelText: "Password"),
-
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your Password';
-                            }
-                            if (value!.length < 6) {
-                              return 'Your Password must be least of 6 character';
-                            }
-                            return null;
-                          },
-                        ),
-
-                        SizedBox(height: 16),
-
-                        FilledButton(onPressed: () {onTapSignUpButton(emailController.text.trim());}, child: Text("Register")),
-
-                        SizedBox(height: 16),
-
-                        RichText(
-                          text: TextSpan(
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-
-                            text: 'Already have an account? ',
-                            children: [
-                              TextSpan(
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
-                                ),
-                                text: 'SignIn',
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    onSignInButton(context);
-                                  },
-                              ),
-                            ],
+                  Form(
+                    key: signupFormKey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: emailController,
+                            decoration: InputDecoration(labelText: "Email"),
+                            validator: (String? value) {
+                              return Validators.validateEmail(
+                                value,
+                                "Enter a valid email address"
+                              );
+                            },
                           ),
-                        ),
-                      ],
+
+                          SizedBox(height: 14),
+
+                          TextFormField(
+                            controller: firstNameController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(labelText: "First Name"),
+
+                            validator: (String? value) {
+                              return Validators.validateText(value, "Enter your First Name");}
+                          ),
+
+                          SizedBox(height: 14),
+                          TextFormField(
+                            controller: lastNameController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(labelText: "Last Name"),
+                            validator: (String? value) {
+
+                              return Validators.validateText(value, "Enter your Last Name");
+                            },
+                          ),
+
+                          SizedBox(height: 14),
+                          TextFormField(
+                            controller: phoneController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(labelText: "Phone"),
+                            validator: (String? value) {
+
+                              return Validators.validateText(value, "Enter your Phone Number");
+                            },
+                          ),
+
+                          SizedBox(height: 14),
+                          TextFormField(
+                            controller: cityController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(labelText: "City"),
+                            validator: (String? value) {
+                              return Validators.validateText(value, "Enter your City");
+                            },
+                          ),
+
+                          SizedBox(height: 14),
+
+                          TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(labelText: "Password"),
+
+                            validator: (String? value) {
+                              return Validators.validatePassword(value);
+                            },
+                          ),
+
+                          SizedBox(height: 16),
+
+                          Consumer<SignUpProviders>(
+                            builder: (context, signupProvider, child) {
+                              return Visibility(
+                                visible: signupProvider.signUpInProgress==false,
+                                replacement: Center(child: CircularProgressIndicator.adaptive(),),
+                                child: FilledButton(
+                                  onPressed: () {
+                                    onTapSignUpButton();
+                                  },
+                                  child: Text("Register"),
+                                ),
+                              );
+                            }
+                          ),
+
+                          SizedBox(height: 16),
+
+                          RichText(
+                            text: TextSpan(
+                              style: TextStyle(color: Colors.black, fontSize: 16),
+
+                              text: 'Already have an account? ',
+                              children: [
+                                TextSpan(
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  text: 'SignIn',
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      onSignInButton(context);
+                                    },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -193,7 +195,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void dispose() {
-
     emailController.dispose();
     passwordController.dispose();
     cityController.dispose();
@@ -203,7 +204,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  void onTapSignUpButton(String email) {
-    Navigator.pushNamed(context, VerifyOtp.name);
+  Future<void> onTapSignUpButton() async {
+    if (signupFormKey.currentState!.validate()) {
+      bool isSuccess = await _signUpProviders.signUp(
+        SignUpParams(
+          firstName: firstNameController.text,
+          lastName: lastNameController.text,
+          email: emailController.text.trim(),
+          phone: phoneController.text,
+          city: cityController.text,
+          password: passwordController.text,
+        ),
+      );
+      if (!isSuccess) {
+
+        showSnackBarMessage(context, _signUpProviders.errorMessage!);
+      }
+      else {
+        showSnackBarMessage(context, "Verify your Email!");
+        Navigator.pushNamed(context, VerifyOtp.name);
+      }
+
+
+    }
+
   }
 }
