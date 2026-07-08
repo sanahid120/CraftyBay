@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,13 +69,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         children: [
                           TextFormField(
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: emailController,
                             decoration: InputDecoration(labelText: "Email"),
                             validator: (String? value) {
                               return Validators.validateEmail(
                                 value,
-                                "Enter a valid email address"
+                                "Enter a valid email address",
                               );
                             },
                           ),
@@ -85,49 +85,67 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                           TextFormField(
                             controller: firstNameController,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            decoration: InputDecoration(labelText: "First Name"),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(
+                              labelText: "First Name",
+                            ),
 
                             validator: (String? value) {
-                              return Validators.validateText(value, "Enter your First Name");}
+                              return Validators.validateText(
+                                value,
+                                "Enter your First Name",
+                              );
+                            },
                           ),
 
                           SizedBox(height: 14),
                           TextFormField(
                             controller: lastNameController,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(labelText: "Last Name"),
                             validator: (String? value) {
-
-                              return Validators.validateText(value, "Enter your Last Name");
+                              return Validators.validateText(
+                                value,
+                                "Enter your Last Name",
+                              );
                             },
                           ),
 
                           SizedBox(height: 14),
                           TextFormField(
                             controller: phoneController,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(labelText: "Phone"),
                             validator: (String? value) {
-
-                              return Validators.validateText(value, "Enter your Phone Number");
+                              return Validators.validateText(
+                                value,
+                                "Enter your Phone Number",
+                              );
                             },
                           ),
 
                           SizedBox(height: 14),
                           TextFormField(
                             controller: cityController,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(labelText: "City"),
                             validator: (String? value) {
-                              return Validators.validateText(value, "Enter your City");
+                              return Validators.validateText(
+                                value,
+                                "Enter your City",
+                              );
                             },
                           ),
 
                           SizedBox(height: 14),
 
                           TextFormField(
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: passwordController,
                             obscureText: true,
                             decoration: InputDecoration(labelText: "Password"),
@@ -142,8 +160,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Consumer<SignUpProviders>(
                             builder: (context, signupProvider, child) {
                               return Visibility(
-                                visible: signupProvider.signUpInProgress==false,
-                                replacement: Center(child: CircularProgressIndicator.adaptive(),),
+                                visible:
+                                    signupProvider.signUpInProgress == false,
+                                replacement: Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                ),
                                 child: FilledButton(
                                   onPressed: () {
                                     onTapSignUpButton();
@@ -151,14 +172,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: Text("Register"),
                                 ),
                               );
-                            }
+                            },
                           ),
 
                           SizedBox(height: 16),
 
                           RichText(
                             text: TextSpan(
-                              style: TextStyle(color: Colors.black, fontSize: 16),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
 
                               text: 'Already have an account? ',
                               children: [
@@ -217,16 +241,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       );
       if (!isSuccess) {
-
         showSnackBarMessage(context, _signUpProviders.errorMessage!);
+      } else {
+        showSnackBarMessage(
+          context,
+          "An OTP has been sent to your email address. Default OTP is 1234.",
+        );
+        Navigator.pushNamed(
+          context,
+          VerifyOtp.name,
+          arguments: emailController.text.trim(),
+        );
       }
-      else {
-        showSnackBarMessage(context, "Verify your Email!");
-        Navigator.pushNamed(context, VerifyOtp.name);
-      }
-
-
     }
-
   }
 }

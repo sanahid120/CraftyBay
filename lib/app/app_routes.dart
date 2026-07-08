@@ -27,7 +27,8 @@ class AppRoutes {
         widget = SignUpScreen();
         break;
       case VerifyOtp.name:
-        widget = VerifyOtp();
+        final email = settings.arguments as String;
+        widget = VerifyOtp(email: email,);
       break;
       case HomepageBottomNavBar.name:
         widget = HomepageBottomNavBar();

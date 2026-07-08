@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../shared/presentation/widgets/snackbar_msg.dart';
 import '../providers/timer_provider.dart';
+import '../providers/verify_otp_provider.dart';
 
 class ResendOtpSection extends StatefulWidget {
   const ResendOtpSection({super.key});
+
 
   @override
   State<ResendOtpSection> createState() => _ResendOtpSectionState();
@@ -53,9 +56,10 @@ class _ResendOtpSectionState extends State<ResendOtpSection> {
     );
   }
 
-  void _onTapResendButton() {
+  Future<void> _onTapResendButton() async {
     if (_timerProvider.isRunning) return;
 
     _timerProvider.startTimer(60);
+
   }
 }
