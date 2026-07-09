@@ -62,4 +62,9 @@ class _ResendOtpSectionState extends State<ResendOtpSection> {
     _timerProvider.startTimer(60);
 
   }
+  @override
+  void dispose() {
+    _timerProvider.stopTimer();
+    super.dispose();
+  }
 }

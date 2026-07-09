@@ -240,6 +240,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           password: passwordController.text,
         ),
       );
+      if (!mounted) return;
       if (!isSuccess) {
         showSnackBarMessage(context, _signUpProviders.errorMessage!);
       } else {
