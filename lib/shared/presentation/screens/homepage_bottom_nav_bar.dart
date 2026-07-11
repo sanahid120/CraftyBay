@@ -1,5 +1,6 @@
 import 'package:craftybay/app/app_colors.dart';
 import 'package:craftybay/features/cart/presentation/screens/cart_screen.dart';
+import 'package:craftybay/features/category/presentaion/providers/category_list_provider.dart';
 import 'package:craftybay/features/category/presentaion/screens/category_screen.dart';
 import 'package:craftybay/features/home/presentation/providers/home_slider_provider.dart';
 import 'package:craftybay/features/home/presentation/screens/HomeScreen.dart';
