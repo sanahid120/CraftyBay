@@ -1,6 +1,7 @@
 import 'package:craftybay/app/app_colors.dart';
 import 'package:craftybay/features/cart/presentation/screens/cart_screen.dart';
 import 'package:craftybay/features/category/presentaion/screens/category_screen.dart';
+import 'package:craftybay/features/home/presentation/providers/home_slider_provider.dart';
 import 'package:craftybay/features/home/presentation/screens/HomeScreen.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,23 @@ class HomepageBottomNavBar extends StatefulWidget {
   State<HomepageBottomNavBar> createState() => _HomepageBottomNavBarState();
 }
 
+
 class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+
+
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<HomeSliderProvider>().getSlidersData();
+    });
+  }
+
+
   final List<Widget> _screens = [
     HomeScreen(),
     CategoryScreen(),
