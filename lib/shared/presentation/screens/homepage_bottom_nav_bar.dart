@@ -31,6 +31,7 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<HomeSliderProvider>().getSlidersData();
+      context.read<CategoryListProvider>().getCategories();
     });
   }
 
