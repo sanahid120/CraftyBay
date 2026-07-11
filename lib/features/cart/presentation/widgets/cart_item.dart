@@ -15,7 +15,6 @@ class CartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      color: Colors.white,
       shadowColor: AppColors.themeColor.withAlpha(50),
 
       child: Padding(
@@ -43,7 +42,7 @@ class CartItem extends StatelessWidget {
                           children: [
                             Text(
                               "this is New year special giftdddddsssssssssssdhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
-                              style: TextTheme.of(context).titleMedium?.copyWith(color: Colors.black87, fontSize: 18),overflow: TextOverflow.ellipsis,maxLines: 2,
+                              style: TextTheme.of(context).titleMedium?.copyWith( fontSize: 18),overflow: TextOverflow.ellipsis,maxLines: 2,
                             ),
                             Text(
                               "Color: Red Size: XL",

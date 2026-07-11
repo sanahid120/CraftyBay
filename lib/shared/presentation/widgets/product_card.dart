@@ -18,7 +18,6 @@ class ProductCard extends StatelessWidget {
       },
       child: Card(
         elevation: 4,
-        color: Colors.white,
 
         child: SizedBox(
           width: 150,
@@ -48,7 +47,7 @@ class ProductCard extends StatelessWidget {
                   'shoe hani jani me name',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  style: TextStyle(fontSize: 18,),
                 ),
               ),
               Padding(

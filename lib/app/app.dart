@@ -16,44 +16,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: [
-
-        ChangeNotifierProvider(create: (context)=> LanguageProvider()),
-        ChangeNotifierProvider(create: (context)=> ThemeProvider()),
-        ChangeNotifierProvider(create: (context)=> HomepageMainNavProvider()),
-        ChangeNotifierProvider(create: (context)=> HomeSliderProvider()),
+        ChangeNotifierProvider(create: (context) => LanguageProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => HomepageMainNavProvider()),
+        ChangeNotifierProvider(create: (context) => HomeSliderProvider()),
       ],
-      child: Consumer2<LanguageProvider,ThemeProvider>(
-          builder: ( context, languageProvider, themeProvider , child) {
-            return MaterialApp(
-              navigatorKey: navigatorKey,
+      child: Consumer2<LanguageProvider, ThemeProvider>(
+        builder: (context, languageProvider, themeProvider, child) {
+          return MaterialApp(
+            navigatorKey: navigatorKey,
 
-              debugShowCheckedModeBanner: false,
+            debugShowCheckedModeBanner: false,
 
-              title: 'CraftyBay',
-              localizationsDelegates: [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
+            title: 'CraftyBay',
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
 
-              locale: languageProvider.currentLocale,
-              supportedLocales: languageProvider.supportedLocales,
+            locale: languageProvider.currentLocale,
+            supportedLocales: languageProvider.supportedLocales,
 
-              theme: themeProvider.currentTheme,
+            theme: themeProvider.currentTheme,
 
+            initialRoute: '/',
+            onGenerateRoute: AppRoutes.onGenerateRoute,
 
-
-              initialRoute: '/',
-              onGenerateRoute: AppRoutes.onGenerateRoute,
-
-              home: SplashScreen(),
-            );
-
-          }
+            home: SplashScreen(),
+          );
+        },
       ),
     );
   }

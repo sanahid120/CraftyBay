@@ -15,11 +15,10 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-
           crossAxisAlignment: .center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 16,),
+            SizedBox(height: 16),
 
             Text(AppLocalizations.of(context).hello),
             FilledButton(
@@ -27,25 +26,25 @@ class Homepage extends StatelessWidget {
                 Locale locale = context.read<LanguageProvider>().currentLocale;
                 locale == Locale('en')
                     ? context.read<LanguageProvider>().changeLocale(
-                  Locale('bn'),
-                )
+                        Locale('bn'),
+                      )
                     : context.read<LanguageProvider>().changeLocale(
-                  Locale('en'),
-                );
+                        Locale('en'),
+                      );
               },
               child: Text(context.localization.changeYourLanguage),
             ),
-            SizedBox(height: 16,),
+            SizedBox(height: 16),
             FilledButton(
               onPressed: () {
                 context.read<ThemeProvider>().currentTheme ==
-                    AppTheme.lightTheme
+                        AppTheme.lightTheme
                     ? context.read<ThemeProvider>().changeTheme(
-                  AppTheme.darkTheme,
-                )
+                        AppTheme.darkTheme,
+                      )
                     : context.read<ThemeProvider>().changeTheme(
-                  AppTheme.lightTheme,
-                );
+                        AppTheme.lightTheme,
+                      );
               },
               child: Text(context.localization.changeTheme),
             ),

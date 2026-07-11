@@ -18,8 +18,6 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
   final ValueNotifier<int> _currentIndex = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-
-
     return Consumer<HomeSliderProvider>(
       builder: (context, homeSliderProvider, _) {
         return Visibility(
@@ -52,7 +50,6 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                         width: double.maxFinite,
                         height: double.maxFinite,
 
-
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
@@ -62,18 +59,18 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                             height: double.maxFinite,
                             cacheHeight: 550,
                             cacheWidth: 1000,
-                            loadingBuilder: (context,child,loadingProgress){
-                              if(loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(color: AppColors.themeColor),
-                              );
-                            },
-                            errorBuilder: (context,child,loadingProgress){
-                              return Center(
-                                child: Icon(Icons.error_outline),
-                              );
-                            },
 
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.themeColor,
+                                ),
+                              );
+                            },
+                            errorBuilder: (context, child, loadingProgress) {
+                              return Center(child: Icon(Icons.error_outline));
+                            },
                           ),
                         ),
                       );
@@ -89,7 +86,11 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                   return Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      for (int i = 0; i < homeSliderProvider.homeSliders.length; i++)
+                      for (
+                        int i = 0;
+                        i < homeSliderProvider.homeSliders.length;
+                        i++
+                      )
                         Container(
                           alignment: Alignment.center,
                           height: 10,
@@ -117,5 +118,3 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
     );
   }
 }
-
-
