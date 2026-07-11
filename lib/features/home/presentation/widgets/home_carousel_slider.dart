@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:craftybay/app/app_colors.dart';
-import 'package:craftybay/app/app_paths.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/home_slider_provider.dart';
