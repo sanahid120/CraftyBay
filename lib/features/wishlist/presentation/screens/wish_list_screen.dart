@@ -45,7 +45,7 @@ class _WishListScreenState extends State<WishListScreen> {
               childAspectRatio: .65,
             ),
             itemBuilder: (context, index) {
-              return ProductCard();
+              // return ProductCard();
             },
           ),
         ),

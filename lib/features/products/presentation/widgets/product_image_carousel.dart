@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../../app/app_paths.dart';
 
 class ProductDetailsImageSlider extends StatefulWidget {
-  const ProductDetailsImageSlider({super.key});
+  const ProductDetailsImageSlider( {super.key,required this.photos});
+  final List<String> photos;
 
   @override
   State<ProductDetailsImageSlider> createState() =>
@@ -15,7 +16,6 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
   final ValueNotifier<int> _currentIndex = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
 
     return Stack(
       children: [
@@ -26,17 +26,12 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
             onPageChanged: (index, reason) {
               _currentIndex.value = index;
             },
-            autoPlay: true,
+            autoPlay: widget.photos.length>1?true:false,
             autoPlayAnimationDuration: Duration(seconds: 3),
           ),
 
           items:
-              [
-                AssetPaths.navLogoSvg,
-                AssetPaths.logoSvg,
-                AssetPaths.shoeImage,
-                AssetPaths.noImagePng,
-              ].map((i) {
+              widget.photos.map((i) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
@@ -45,7 +40,23 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
 
                       decoration: BoxDecoration(color: Colors.grey.withAlpha(50)),
-                      child: Text('text $i', style: TextStyle(fontSize: 16.0)),
+                      child: Image.network(i,
+                        cacheWidth: 720,
+                        cacheHeight: 480,
+                        height: 220,
+                        width: double.infinity,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(AssetPaths.noImagePng,fit: BoxFit.cover,);
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return Center(child: CircularProgressIndicator());
+                        },
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                      ),
                     );
                   },
                 );
@@ -62,7 +73,7 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
               return Row(
                 mainAxisAlignment: .center,
                 children: [
-                  for (int i = 0; i < 4; i++)
+                  for (int i = 0; i < widget.photos.length; i++)
                     Container(
                       alignment: Alignment.center,
                       height: 10,

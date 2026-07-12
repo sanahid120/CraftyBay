@@ -11,13 +11,13 @@ class HorizontalProductListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 225,
-      child: ListView.builder(
-        scrollDirection: .horizontal,
-        shrinkWrap: true,
-        itemCount: 10,
-        itemBuilder: (context, index) => ProductCard(),
-      ),
+      // height: 225,
+      // child: ListView.builder(
+      //   scrollDirection: .horizontal,
+      //   shrinkWrap: true,
+      //   itemCount: 10,
+      //   itemBuilder: (context, index) => ProductCard( ),
+      // ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:craftybay/app/constants.dart';
+import 'package:craftybay/features/products/data/model/product_model.dart';
 import 'package:craftybay/features/products/presentation/widgets/size_picker.dart';
 import 'package:craftybay/shared/presentation/widgets/fav_icon.dart';
 import 'package:craftybay/shared/presentation/widgets/inc_dec_button.dart';
@@ -11,7 +12,9 @@ import '../widgets/color_picker.dart';
 import '../widgets/product_image_carousel.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  const ProductDetailsScreen({super.key, required this.productDetails});
+
+  final ProductModel productDetails;
   static const String name = "/ProductDetailsScreen";
 
   @override
@@ -47,64 +50,72 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       body: Column(
         children: [
           Expanded(
-            child: Column(
-              children: [
-                ProductDetailsImageSlider(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        buildTitleSection(context),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ProductDetailsImageSlider(
+                    photos: widget.productDetails.photos,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          buildTitleSection(
+                            context,
+                            widget.productDetails.title,
+                          ),
 
-                        const SizedBox(height: 16),
-                        ColorPicker(
-                          colors: colors,
-                          onColorSelected: (String color) {},
-                        ),
-                        const SizedBox(height: 16),
-                        SizePicker(
-                          sizes: sizes,
-                          onSizeSelected: (String color) {},
-                        ),
-                        const SizedBox(height: 16),
-                        Column(
-                          crossAxisAlignment: .start,
-                          children: [
-                            Text(
-                              "Description",
-                              style: TextTheme.of(context).titleMedium
-                                  ?.copyWith(color: AppColors.themeColor),
-                            ),
-
-                            const SizedBox(height: 8),
-
-                            Text(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                              style: TextTheme.of(context).bodyMedium?.copyWith(
-                                color: Colors.grey.shade600,
+                          const SizedBox(height: 16),
+                          ColorPicker(
+                            colors: colors,
+                            onColorSelected: (String color) {},
+                          ),
+                          const SizedBox(height: 16),
+                          SizePicker(
+                            sizes: sizes,
+                            onSizeSelected: (String color) {},
+                          ),
+                          const SizedBox(height: 16),
+                          Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              Text(
+                                "Description",
+                                style: TextTheme.of(context).titleMedium
+                                    ?.copyWith(color: AppColors.themeColor),
                               ),
-                              maxLines: 25,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ],
+
+                              Text(
+                                widget.productDetails.description,
+                                style: TextTheme.of(context).bodyMedium
+                                    ?.copyWith(color: Colors.grey.shade600),
+                                maxLines: 25,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
 
-          AddToCartBar(price: 120, onTapAddToCart: () {}),
+          AddToCartBar(
+            price: widget.productDetails.currentPrice,
+            onTapAddToCart: () {},
+          ),
         ],
       ),
     );
   }
 }
 
-Widget buildTitleSection(BuildContext context) {
+Widget buildTitleSection(BuildContext context, String title) {
   return Row(
     spacing: 8,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,7 +125,7 @@ Widget buildTitleSection(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Nike 2026- New Edition Shoe With Black Color',
+              title,
               style: TextTheme.of(
                 context,
               ).titleLarge?.copyWith(color: Colors.black87),

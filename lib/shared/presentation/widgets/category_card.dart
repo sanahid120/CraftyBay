@@ -12,7 +12,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onTapCategory(context, category.title);
+        onTapCategory(context, category);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -33,7 +33,7 @@ class CategoryCard extends StatelessWidget {
               cacheWidth: 50,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
-                return Icon(Icons.error, color: AppColors.themeColor);
+                return Icon(Icons.error, color: AppColors.themeColor, size: 32);
               },
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) {
@@ -60,9 +60,9 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  void onTapCategory(BuildContext context, String categoryName) {
+  void onTapCategory(BuildContext context, CategoryModel category ) {
     Navigator.of(
       context,
-    ).pushNamed(ProductListScreen.name, arguments: categoryName);
+    ).pushNamed(ProductListScreen.name,  arguments: category, );
   }
 }

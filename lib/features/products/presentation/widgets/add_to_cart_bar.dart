@@ -8,7 +8,7 @@ class AddToCartBar extends StatelessWidget {
   const AddToCartBar({
     super.key,required this.price,required this.onTapAddToCart
   });
-  final double price;
+  final int price;
   final VoidCallback onTapAddToCart;
   @override
   Widget build(BuildContext context) {

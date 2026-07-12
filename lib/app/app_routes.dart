@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import '../features/auth/presentation/screens/homepage.dart';
 import '../features/auth/presentation/screens/sign_in_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
+import '../features/category/data/models/category_model.dart';
 import '../features/category/presentaion/screens/category_screen.dart';
+import '../features/products/data/model/product_model.dart';
 import '../features/products/presentation/screens/product_details_screen.dart';
 import '../features/products/presentation/screens/product_list_screen.dart';
 
@@ -34,14 +36,15 @@ class AppRoutes {
         widget = HomepageBottomNavBar();
         break;
       case ProductListScreen.name:
-        final categoryName = settings.arguments as String;
-        widget = ProductListScreen(categoryName: categoryName,);
+        final CategoryModel category = settings.arguments as CategoryModel;
+        widget = ProductListScreen(category: category,);
         break;
       case CategoryScreen.name:
         widget = CategoryScreen();
         break;
       case ProductDetailsScreen.name:
-        widget = ProductDetailsScreen();
+        final ProductModel product = settings.arguments as ProductModel;
+        widget = ProductDetailsScreen(productDetails: product,);
         break;
       default:
 
