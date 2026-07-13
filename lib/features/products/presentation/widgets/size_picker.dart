@@ -32,7 +32,7 @@ class _SizePickerState extends State<SizePicker> {
         SizedBox(
           height: 35,
           width: double.infinity,
-          child: ListView.separated(
+          child: widget.sizes.isEmpty ? Text("No Size available for this Product!") : ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {

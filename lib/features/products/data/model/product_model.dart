@@ -4,6 +4,9 @@ class ProductModel {
   final int currentPrice;
   final String description;
   final List<String> photos;
+  final List<String> colors;
+  final List<String> sizes;
+
 
 
   ProductModel({
@@ -12,6 +15,8 @@ class ProductModel {
     required this.currentPrice,
     required this.description,
     required this.photos,
+    this.colors = const [],
+    this.sizes = const [],
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -21,6 +26,8 @@ class ProductModel {
       description: json['description'],
       currentPrice: json['current_price'],
       photos: List<String>.from(json['photos']),
+      colors: List<String>.from(json['colors']),
+      sizes: List<String>.from(json['sizes']),
     );
   }
 
@@ -31,6 +38,8 @@ class ProductModel {
       'current_price': currentPrice,
       'photos': photos,
       'description': description,
+      'colors': colors,
+      'sizes': sizes,
     };
   }
 }

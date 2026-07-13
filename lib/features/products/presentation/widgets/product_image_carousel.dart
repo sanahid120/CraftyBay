@@ -54,7 +54,7 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
                           }
                           return Center(child: CircularProgressIndicator());
                         },
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                         alignment: Alignment.center,
                       ),
                     );

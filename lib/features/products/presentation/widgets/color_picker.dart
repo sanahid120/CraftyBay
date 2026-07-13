@@ -32,7 +32,7 @@ class _ColorPickerState extends State<ColorPicker> {
         SizedBox(
           height: 40,
           width: double.infinity,
-          child: ListView.separated(
+          child: widget.colors.isEmpty ? Text("No Color available for this Product!") : ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {

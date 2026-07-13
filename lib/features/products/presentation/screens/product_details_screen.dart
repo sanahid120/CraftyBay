@@ -24,16 +24,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    List<String> colors = [
-      "Black",
-      "Red",
-      "Green",
-      "Yellow",
-      "Magenta",
-      "Blue",
-      "White",
-    ];
-    List<String> sizes = ["S", "M", "L", "XL", "XXL"];
+
 
     return Scaffold(
       appBar: AppBar(
@@ -60,6 +51,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: SingleChildScrollView(
                       child: Column(
+                        crossAxisAlignment: .start,
                         children: [
                           buildTitleSection(
                             context,
@@ -68,16 +60,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                           const SizedBox(height: 16),
                           ColorPicker(
-                            colors: colors,
+                            colors: widget.productDetails.colors,
                             onColorSelected: (String color) {},
                           ),
                           const SizedBox(height: 16),
                           SizePicker(
-                            sizes: sizes,
-                            onSizeSelected: (String color) {},
+                            sizes: widget.productDetails.sizes,
+                            onSizeSelected: (String size) {},
                           ),
                           const SizedBox(height: 16),
                           Column(
+                            mainAxisAlignment: .start,
                             crossAxisAlignment: .start,
                             children: [
                               Text(
@@ -85,6 +78,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 style: TextTheme.of(context).titleMedium
                                     ?.copyWith(color: AppColors.themeColor),
                               ),
+                              const SizedBox(height: 8),
 
                               Text(
                                 widget.productDetails.description,
