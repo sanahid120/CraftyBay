@@ -23,6 +23,8 @@ class AuthController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(userKey);
     await prefs.remove(tokenKey);
+    userModel = null;
+    token = null;
   }
 
   static Future<void> getUserData() async {
@@ -32,8 +34,9 @@ class AuthController {
   }
 
 
-  static Future<bool> isUserLoggedIn() async {
+  static Future<bool> isUserLoggedIn()  async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.containsKey(tokenKey);
+
   }
 }

@@ -40,7 +40,7 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
 
                       decoration: BoxDecoration(color: Colors.grey.withAlpha(50)),
-                      child: Image.network(i,
+                      child: widget.photos.isEmpty? Image.asset(AssetPaths.noImagePng,fit: BoxFit.cover,): Image.network(i,
                         cacheWidth: 720,
                         cacheHeight: 480,
                         height: 220,
@@ -54,7 +54,7 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
                           }
                           return Center(child: CircularProgressIndicator());
                         },
-                        fit: BoxFit.contain,
+                        fit: BoxFit.scaleDown,
                         alignment: Alignment.center,
                       ),
                     );

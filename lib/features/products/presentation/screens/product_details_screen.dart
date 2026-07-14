@@ -1,11 +1,12 @@
-import 'package:craftybay/app/constants.dart';
 import 'package:craftybay/features/products/data/model/product_model.dart';
 import 'package:craftybay/features/products/presentation/widgets/size_picker.dart';
 import 'package:craftybay/shared/presentation/widgets/fav_icon.dart';
 import 'package:craftybay/shared/presentation/widgets/inc_dec_button.dart';
+import 'package:craftybay/shared/presentation/widgets/snackbar_msg.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../app/controllers/auth_controller.dart';
 import '../../../../shared/presentation/widgets/product_rating.dart';
 import '../widgets/add_to_cart_bar.dart';
 import '../widgets/color_picker.dart';
@@ -24,8 +25,6 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Product Details"),
@@ -100,7 +99,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
 
           AddToCartBar(
-            price: widget.productDetails.currentPrice,
+            price: widget.productDetails.currentPrice as int,
             onTapAddToCart: () {},
           ),
         ],
@@ -130,7 +129,9 @@ Widget buildTitleSection(BuildContext context, String title) {
               children: [
                 ProductRating(rating: 4.7),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    onPressedReviewButton(context);
+                  },
                   child: Text(
                     'Reviews',
                     style: TextTheme.of(
@@ -148,4 +149,13 @@ Widget buildTitleSection(BuildContext context, String title) {
       IncDecButton(onChange: (int quantity) {}),
     ],
   );
+}
+
+Future<void> onPressedReviewButton(BuildContext context) async {
+  if(await AuthController.isUserLoggedIn()){
+
+  }else{
+
+    showSnackBarMessage(context, "Please Login First!");
+  }
 }

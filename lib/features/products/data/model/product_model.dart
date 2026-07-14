@@ -3,6 +3,7 @@ class ProductModel {
   final String title;
   final int currentPrice;
   final String description;
+  final int productQuantity;
   final List<String> photos;
   final List<String> colors;
   final List<String> sizes;
@@ -14,6 +15,7 @@ class ProductModel {
     required this.title,
     required this.currentPrice,
     required this.description,
+    required this.productQuantity,
     required this.photos,
     this.colors = const [],
     this.sizes = const [],
@@ -24,6 +26,7 @@ class ProductModel {
       id: json['_id'],
       title: json['title'],
       description: json['description'],
+      productQuantity: json['quantity'],
       currentPrice: json['current_price'],
       photos: List<String>.from(json['photos']),
       colors: List<String>.from(json['colors']),
@@ -38,6 +41,7 @@ class ProductModel {
       'current_price': currentPrice,
       'photos': photos,
       'description': description,
+      'quantity': productQuantity,
       'colors': colors,
       'sizes': sizes,
     };

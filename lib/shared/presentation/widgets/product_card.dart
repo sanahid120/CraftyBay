@@ -16,13 +16,14 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onTapProduct(context,product);
+        onTapProduct(context, product);
       },
       child: Card(
         elevation: 4,
 
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: .start,
           spacing: 2,
           children: [
             Flexible(
@@ -36,25 +37,30 @@ class ProductCard extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    product.photos[0],
-                    cacheWidth: 140,
-                    cacheHeight: 160,
-                    height: 160,
-                    width: double.infinity,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset(AssetPaths.noImagePng,fit: BoxFit.cover,);
-                    },
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      }
-                      return Center(child: CircularProgressIndicator());
-                    },
+                  child: product.photos.isEmpty
+                      ? Image.asset(AssetPaths.noImagePng, fit: BoxFit.cover)
+                      : Image.network(
+                          product.photos[0],
+                          cacheWidth: 140,
+                          cacheHeight: 160,
+                          height: 160,
+                          width: double.infinity,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              AssetPaths.noImagePng,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Center(child: CircularProgressIndicator());
+                          },
 
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
-                  ),
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center,
+                        ),
                 ),
               ),
             ),
@@ -91,6 +97,8 @@ class ProductCard extends StatelessWidget {
   }
 
   void onTapProduct(BuildContext context, ProductModel product) {
-    Navigator.of(context).pushNamed(ProductDetailsScreen.name, arguments: product);
+    Navigator.of(
+      context,
+    ).pushNamed(ProductDetailsScreen.name, arguments: product);
   }
 }

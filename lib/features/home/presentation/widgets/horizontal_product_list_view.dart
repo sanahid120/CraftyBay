@@ -16,7 +16,7 @@ class HorizontalProductListView extends StatelessWidget {
       //   scrollDirection: .horizontal,
       //   shrinkWrap: true,
       //   itemCount: 10,
-      //   itemBuilder: (context, index) => ProductCard( ),
+      //  itemBuilder: (context, index) => ProductCard( ),
       // ),
     );
   }
