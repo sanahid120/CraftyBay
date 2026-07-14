@@ -1,10 +1,19 @@
 import 'package:craftybay/app/app_paths.dart';
+import 'package:craftybay/app/providers/language_provider.dart';
+import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
+import 'package:craftybay/features/category/data/models/category_model.dart';
+import 'package:craftybay/features/category/presentaion/providers/category_list_provider.dart';
 import 'package:craftybay/features/products/presentation/providers/product_list_provider.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/app_theme.dart';
+import '../../../../app/extensions/localization_extension.dart';
+import '../../../../app/providers/theme_provider.dart';
+import '../../../products/data/model/product_model.dart';
+import '../../../products/presentation/screens/product_list_screen.dart';
 import '../widgets/appbar_widget.dart';
 import '../widgets/home_carousel_slider.dart';
 import '../widgets/home_category_list.dart';
@@ -20,66 +29,218 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final ProductListProvider _productListProvider = ProductListProvider();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _productListProvider.getProducts("6812518cea40bfc6edc67356");
+      loadProducts();
     });
+  }
+
+  Future<void> loadProducts() async {
+    final categoryProvider = context.read<CategoryListProvider>();
+
+    if (categoryProvider.categories.isNotEmpty) {
+      await Future.wait([
+        context.read<ProductListProvider>().getProducts(
+          categoryProvider.categories[8].id,
+        ),
+        Future.delayed(Duration(microseconds: 100)),
+        context.read<ProductListProvider>().getProducts(
+          categoryProvider.categories[7].id,
+        ),
+        Future.delayed(Duration(microseconds: 100)),
+        context.read<ProductListProvider>().getProducts(
+          categoryProvider.categories[6].id,
+        ),
+      ]);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _productListProvider,
+    return Scaffold(
+      appBar: AppBar(
+        title: SvgPicture.asset(AssetPaths.navLogoSvg, height: 30),
 
+        actions: [
+          AppbarIconButton(icon: Icons.person, onTap: () {}),
+          const SizedBox(width: 16),
+          AppbarIconButton(icon: Icons.notifications, onTap: () {}),
+          const SizedBox(width: 16),
+        ],
+      ),
 
-      child: Scaffold(
-        appBar: AppBar(
-          title: SvgPicture.asset(AssetPaths.navLogoSvg),
-          actions: [
-            AppbarIconButton(onTap: () {}, icon: Icons.person),
-            const SizedBox(width: 8),
-            AppbarIconButton(onTap: () {}, icon: Icons.call),
-            const SizedBox(width: 8),
-            AppbarIconButton(onTap: () {}, icon: Icons.notifications),
-            const SizedBox(width: 8),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
+      drawer: Drawer(
+        child: Consumer2<ThemeProvider, LanguageProvider>(
+          builder: (context, themeProvider, languageProvider, _) {
+            return ListView(
+              padding: EdgeInsets.zero,
               children: [
-                const SizedBox(height: 16),
-                ProductSearchBar(),
-                const SizedBox(height: 16),
-                HomeCarouselSlider(),
-                const SizedBox(height: 16),
-                SectionHeader(
-                  name: "All Categories",
-                  onTapSeeAll: () {
-                    context.read<HomepageMainNavProvider>().moveToCategory();
-                  },
+                DrawerHeader(
+                  decoration: BoxDecoration(color: Colors.grey.withAlpha(50)),
+                  child: AppLogo(),
                 ),
-                const SizedBox(height: 16),
-                HomeCategoryList(),
-                const SizedBox(height: 16),
-                SectionHeader(name: "Popular", onTapSeeAll: () {}),
-                const SizedBox(height: 8),
-                HorizontalProductListView(),
-                const SizedBox(height: 16),
-                SectionHeader(name: "Special", onTapSeeAll: () {}),
-                const SizedBox(height: 8),
-                HorizontalProductListView(),
-                const SizedBox(height: 16),
-                SectionHeader(name: "New", onTapSeeAll: () {}),
-                const SizedBox(height: 8),
-                HorizontalProductListView(),
+                ListTile(
+                  leading: themeProvider.currentTheme == AppTheme.lightTheme
+                      ? const Icon(Icons.light_mode)
+                      : Icon(Icons.dark_mode),
+                  title: const Text('Change Theme'),
+                  trailing: Switch.adaptive(
+                    value: themeProvider.currentTheme == AppTheme.lightTheme,
+                    onChanged: (value) {
+                      context.read<ThemeProvider>().currentTheme ==
+                              AppTheme.lightTheme
+                          ? context.read<ThemeProvider>().changeTheme(
+                              AppTheme.darkTheme,
+                            )
+                          : context.read<ThemeProvider>().changeTheme(
+                              AppTheme.lightTheme,
+                            );
+                    },
+                    padding: EdgeInsets.zero,
+                  ),
+                ),
+
+                ListTile(
+                  leading: Icon(Icons.language),
+                  title: Text(context.localization.changeYourLanguage),
+                  trailing: DropdownButton<Locale>(
+                    value: languageProvider.currentLocale,
+                    onChanged: (locale) {
+                      languageProvider.changeLocale(locale!);
+                    },
+                    items: [
+                      DropdownMenuItem(
+                        value: Locale('en'),
+                        child: Text('English'),
+                      ),
+                      DropdownMenuItem(
+                        value: Locale('bn'),
+                        child: Text('বাংলা'),
+                      ),
+                    ],
+                  ),
+                ),
               ],
-            ),
+            );
+          },
+        ),
+      ),
+
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(height: 16),
+              const ProductSearchBar(),
+              const SizedBox(height: 16),
+              const HomeCarouselSlider(),
+              const SizedBox(height: 16),
+              SectionHeader(
+                name: "All Categories",
+                onTapSeeAll: () =>
+                    context.read<HomepageMainNavProvider>().moveToCategory(),
+              ),
+              const SizedBox(height: 16),
+              const HomeCategoryList(),
+
+              // --- POPULAR SECTION ---
+              const SizedBox(height: 16),
+              Consumer<CategoryListProvider>(
+                builder: (context, categoryProvider, _) {
+                  if (categoryProvider.categories.length < 9) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return SectionHeader(
+                    name: "Popular",
+                    onTapSeeAll: () {
+                      Navigator.pushNamed(
+                        context,
+                        ProductListScreen.name,
+                        arguments: categoryProvider.categories[8],
+                      );
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: 8),
+              Consumer<CategoryListProvider>(
+                builder: (context, categoryProvider, _) {
+                  if (categoryProvider.categories.length < 9) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return HorizontalProductListView(
+                    category: categoryProvider.categories[8],
+                  );
+                },
+
+              ),
+
+              // --- SPECIAL SECTION ---
+              const SizedBox(height: 16),
+              Consumer<CategoryListProvider>(
+                builder: (context, categoryProvider, _) {
+                  if (categoryProvider.categories.length < 9) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return SectionHeader(
+                    name: "Special",
+                    onTapSeeAll: () {
+                      Navigator.pushNamed(
+                        context,
+                        ProductListScreen.name,
+                        arguments: categoryProvider.categories[7],
+                      );
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: 8),
+              Consumer<CategoryListProvider>(
+                builder: (context, categoryProvider, _) {
+                  if (categoryProvider.categories.length < 9) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return HorizontalProductListView(
+                    category: categoryProvider.categories[7],
+                  );
+                },
+              ),
+
+              // --- NEW ARRIVAL SECTION ---
+              const SizedBox(height: 16),
+              Consumer<CategoryListProvider>(
+                builder: (context, categoryProvider, _) {
+                  if (categoryProvider.categories.length < 9) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return SectionHeader(
+                    name: "New Arrival",
+                    onTapSeeAll: () {
+                      Navigator.pushNamed(
+                        context,
+                        ProductListScreen.name,
+                        arguments: categoryProvider.categories[5],
+                      );
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: 8),
+              Consumer<CategoryListProvider>(
+                builder: (context, categoryProvider, _) {
+                  if (categoryProvider.categories.length < 9) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return HorizontalProductListView(
+                    category: categoryProvider.categories[5],
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

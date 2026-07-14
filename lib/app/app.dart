@@ -6,8 +6,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../features/auth/presentation/screens/splash_screen.dart';
+import '../features/products/presentation/providers/product_list_provider.dart';
 import '../l10n/app_localizations.dart';
 import 'app_routes.dart';
+import 'app_theme.dart';
 import 'providers/language_provider.dart';
 import 'providers/theme_provider.dart';
 
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomepageMainNavProvider()),
         ChangeNotifierProvider(create: (context) => HomeSliderProvider()),
         ChangeNotifierProvider(create: (context) => CategoryListProvider()),
+        ChangeNotifierProvider(create: (context) => ProductListProvider()),
       ],
       child: Consumer2<LanguageProvider, ThemeProvider>(
         builder: (context, languageProvider, themeProvider, child) {
@@ -44,6 +47,10 @@ class MyApp extends StatelessWidget {
             supportedLocales: languageProvider.supportedLocales,
 
             theme: themeProvider.currentTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.system,
+
+
 
             initialRoute: '/',
             onGenerateRoute: AppRoutes.onGenerateRoute,
