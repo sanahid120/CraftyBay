@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   leading: themeProvider.currentTheme == AppTheme.lightTheme
                       ? const Icon(Icons.light_mode)
                       : Icon(Icons.dark_mode),
-                  title: const Text('Change Theme'),
+                  title: Text(context.localization.changeTheme),
                   trailing: Switch.adaptive(
                     value: themeProvider.currentTheme == AppTheme.lightTheme,
                     onChanged: (value) {
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const HomeCarouselSlider(),
               const SizedBox(height: 16),
               SectionHeader(
-                name: "All Categories",
+                name: context.localization.allCategories,
                 onTapSeeAll: () =>
                     context.read<HomepageMainNavProvider>().moveToCategory(),
               ),
@@ -151,11 +151,9 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               Consumer<CategoryListProvider>(
                 builder: (context, categoryProvider, _) {
-                  if (categoryProvider.categories.length < 9) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+
                   return SectionHeader(
-                    name: "Popular",
+                    name: context.localization.popular,
                     onTapSeeAll: () {
                       Navigator.pushNamed(
                         context,
@@ -183,11 +181,9 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               Consumer<CategoryListProvider>(
                 builder: (context, categoryProvider, _) {
-                  if (categoryProvider.categories.length < 9) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+
                   return SectionHeader(
-                    name: "Special",
+                    name: context.localization.special,
                     onTapSeeAll: () {
                       Navigator.pushNamed(
                         context,
@@ -207,18 +203,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   return HorizontalProductListView(
                     category: categoryProvider.categories[7],
                   );
+
                 },
               ),
 
-              // --- NEW ARRIVAL SECTION ---
               const SizedBox(height: 16),
               Consumer<CategoryListProvider>(
                 builder: (context, categoryProvider, _) {
-                  if (categoryProvider.categories.length < 9) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+
                   return SectionHeader(
-                    name: "New Arrival",
+                    name: context.localization.newArrival,
                     onTapSeeAll: () {
                       Navigator.pushNamed(
                         context,

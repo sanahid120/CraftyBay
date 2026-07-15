@@ -99,7 +99,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
 
           AddToCartBar(
-            price: widget.productDetails.currentPrice as int,
+            price: widget.productDetails.currentPrice,
             onTapAddToCart: () {},
           ),
         ],
@@ -127,7 +127,7 @@ Widget buildTitleSection(BuildContext context, String title) {
             ),
             Row(
               children: [
-                ProductRating(rating: 4.7),
+                ProductRating(rating: "4.7"),
                 TextButton(
                   onPressed: () {
                     onPressedReviewButton(context);

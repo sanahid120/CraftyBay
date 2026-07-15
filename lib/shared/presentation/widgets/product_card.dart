@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../../../app/app_colors.dart';
@@ -14,6 +16,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
+    double d = random.nextDouble()*5;
+
     return InkWell(
       onTap: () {
         onTapProduct(context, product);
@@ -38,12 +43,20 @@ class ProductCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: product.photos.isEmpty
-                      ? Image.asset(AssetPaths.noImagePng, fit: BoxFit.cover)
+                      ? Image.asset(
+                          AssetPaths.noImagePng,
+                          fit: BoxFit.scaleDown,
+                          cacheWidth: 240,
+                          cacheHeight: 360,
+                          width: double.infinity,
+                    height:   340,
+                        )
                       : Image.network(
                           product.photos[0],
-                          cacheWidth: 140,
-                          cacheHeight: 160,
-                          height: 160,
+                          cacheWidth: 240,
+                          cacheHeight: 360,
+                          height: 360,
+
                           width: double.infinity,
                           errorBuilder: (context, error, stackTrace) {
                             return Image.asset(
@@ -75,17 +88,18 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     '${Constants.takaSing}${product.currentPrice}',
-                    style: TextTheme.of(
-                      context,
-                    ).titleSmall?.copyWith(color: AppColors.themeColor),
+                    style: TextTheme.of(context).titleSmall?.copyWith(
+                      color: AppColors.themeColor,
+                      fontSize: 16,
+                    ),
                   ),
-                  ProductRating(rating: 4.5),
+                  ProductRating(rating: d.toStringAsFixed(1) ),
                   FavIcon(onTap: () {}),
                 ],
               ),

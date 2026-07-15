@@ -1,4 +1,5 @@
 
+import 'package:craftybay/app/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,7 @@ class _CartScreenState extends State<CartScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Cart"),
+          title: Text(context.localization.cart),
           centerTitle: false,
           leading: IconButton(
             onPressed: () {

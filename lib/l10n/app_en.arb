@@ -1,5 +1,13 @@
 {
-  "hello": "Hello",
-  "changeYourLanguage": "Change your language",
-  "changeTheme": "Change Theme"
+  "changeYourLanguage": "Change your Language",
+  "changeTheme": "Change Theme",
+  "allCategories": "All Categories",
+  "popular": "Popular",
+  "special": "Special",
+  "newArrival": "New Arrival",
+  "home": "Home",
+  "categories": "Categories",
+  "cart": "Cart",
+  "wishlist": "Wishlist",
+  "seeAll": "See all"
 }

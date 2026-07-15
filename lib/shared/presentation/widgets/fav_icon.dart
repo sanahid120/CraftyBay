@@ -15,10 +15,10 @@ class FavIcon extends StatelessWidget {
       child: Container(
         padding: .all(2),
         decoration: BoxDecoration(
-          color: AppColors.themeColor,
+          color: AppColors.themeColor.withAlpha(90),
           borderRadius: .circular(4),
         ),
-        child: Icon(Icons.favorite, color: Colors.white, size: 16),
+        child: Icon(Icons.favorite, color: Colors.white, size: 22),
       ),
     );
   }

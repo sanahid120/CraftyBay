@@ -32,8 +32,9 @@ class _HorizontalProductListViewState extends State<HorizontalProductListView> {
     return ChangeNotifierProvider.value(
       value: _productListProvider,
       child: SizedBox(
-        height: 225,
+        height: 340,
         child: Consumer<ProductListProvider>(
+
           builder: (context, provider, _) {
             if (provider.initialLoadInProgress) {
               return const Center(child: CircularProgressIndicator());
@@ -47,11 +48,12 @@ class _HorizontalProductListViewState extends State<HorizontalProductListView> {
               scrollDirection: Axis.horizontal,
               itemCount: provider.products.length,
               itemBuilder: (context, index) => SizedBox(
-                width: 160,
+                width: 240,
 
                 child: ProductCard(
                   provider.products[index],
                 ),
+
               ),
             );
           },

@@ -8,6 +8,7 @@ import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provide
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/extensions/localization_extension.dart';
 import '../../../features/wishlist/presentation/screens/wish_list_screen.dart';
 
 class HomepageBottomNavBar extends StatefulWidget {
@@ -70,18 +71,18 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
             currentIndex: mainNavProvider.selectedIndex,
             selectedItemColor: AppColors.themeColor,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: context.localization.home),
               BottomNavigationBarItem(
                 icon: Icon(Icons.dashboard),
-                label: "Categories",
+                label: context.localization.categories,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart),
-                label: "Cart",
+                label: context.localization.cart,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.favorite),
-                label: "Wishlist",
+                label: context.localization.wishlist,
               ),
             ],
           ),

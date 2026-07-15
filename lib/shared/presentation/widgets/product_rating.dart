@@ -6,7 +6,7 @@ class ProductRating extends StatelessWidget {
   const ProductRating({
     super.key, required this.rating
   });
-  final double rating;
+  final String rating;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class ProductRating extends StatelessWidget {
       children: [
         Icon(Icons.star, color: Colors.amber, size: 18),
         Text(
-          "$rating",
+          rating,
           style: TextTheme.of(context).titleSmall
               ?.copyWith(color: AppColors.themeColor),
         ),

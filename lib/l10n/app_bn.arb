@@ -1,5 +1,16 @@
 {
-  "hello": "হ্যালো",
   "changeYourLanguage": "আপনার ভাষা পরিবর্তন করুন",
-  "changeTheme": "থিম পরিবর্তন করুন"
+  "changeTheme": "থিম পরিবর্তন করুন",
+  "allCategories": "সকল বিভাগ",
+  "popular": " জনপ্রিয়",
+  "special": "স্পেশাল",
+  "newArrival": "নতুন পণ্য",
+  "home": "হোম",
+  "categories": "বিভাগ ",
+  "cart": "কার্ট",
+  "wishlist": " ওইশলিস্ট",
+  "seeAll": "আরো দেখুন"
+
+
+
 }

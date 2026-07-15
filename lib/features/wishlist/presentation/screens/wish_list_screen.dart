@@ -1,3 +1,4 @@
+import 'package:craftybay/app/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,7 @@ class _WishListScreenState extends State<WishListScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("WishList"),
+          title: Text(context.localization.wishlist),
           centerTitle: false,
           leading: IconButton(
             onPressed: () {

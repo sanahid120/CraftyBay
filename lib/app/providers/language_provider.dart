@@ -4,7 +4,6 @@ import '../controllers/language_controller.dart';
 class LanguageProvider extends ChangeNotifier {
   final LanguageController _languageController = LanguageController();
   
-  // Initialize with a default locale
   Locale _currentLocale = const Locale('en');
 
   final List<Locale> _supportedLocales = [

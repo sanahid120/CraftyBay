@@ -20,7 +20,6 @@ class Homepage extends StatelessWidget {
           children: [
             SizedBox(height: 16),
 
-            Text(AppLocalizations.of(context).hello),
             FilledButton(
               onPressed: () {
                 Locale locale = context.read<LanguageProvider>().currentLocale;

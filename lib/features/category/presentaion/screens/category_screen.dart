@@ -2,6 +2,7 @@ import 'package:craftybay/shared/presentation/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extensions/localization_extension.dart';
 import '../../../../shared/presentation/provider/homepage_main_nav_provider.dart';
 import '../providers/category_list_provider.dart';
 
@@ -43,7 +44,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Categories", style: TextStyle(fontSize: 24)),
+          title: Text(context.localization.categories, style: TextStyle(fontSize: 24)),
           leading: IconButton(
             onPressed: onPressedBackButton,
             icon: const Icon(Icons.arrow_back_ios),
@@ -65,10 +66,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         itemCount: categoryListProvider.categories.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4,
+                              crossAxisCount: 3,
                               crossAxisSpacing: 8,
                               mainAxisSpacing: 16,
-                              childAspectRatio: 0.75,
                             ),
                         itemBuilder: (context, index) {
                           return CategoryCard(

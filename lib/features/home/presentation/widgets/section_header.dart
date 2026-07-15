@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../app/extensions/localization_extension.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader({
@@ -25,7 +26,7 @@ class SectionHeader extends StatelessWidget {
         TextButton(
           onPressed: onTapSeeAll,
           child: Text(
-            "See all",
+            context.localization.seeAll,
             style: TextTheme.of(context).bodyMedium?.copyWith(
               decoration: .underline,
               color: AppColors.themeColor,
