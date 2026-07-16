@@ -1,18 +1,15 @@
 import 'package:craftybay/app/app_paths.dart';
 import 'package:craftybay/app/providers/language_provider.dart';
 import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
-import 'package:craftybay/features/category/data/models/category_model.dart';
 import 'package:craftybay/features/category/presentaion/providers/category_list_provider.dart';
 import 'package:craftybay/features/products/presentation/providers/product_list_provider.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../app/app_theme.dart';
 import '../../../../app/extensions/localization_extension.dart';
 import '../../../../app/providers/theme_provider.dart';
-import '../../../products/data/model/product_model.dart';
 import '../../../products/presentation/screens/product_list_screen.dart';
 import '../widgets/appbar_widget.dart';
 import '../widgets/home_carousel_slider.dart';
@@ -65,8 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
         title: SvgPicture.asset(AssetPaths.navLogoSvg, height: 30),
 
         actions: [
-          AppbarIconButton(icon: Icons.person, onTap: () {}),
-          const SizedBox(width: 16),
           AppbarIconButton(icon: Icons.notifications, onTap: () {}),
           const SizedBox(width: 16),
         ],
@@ -147,11 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               const HomeCategoryList(),
 
-              // --- POPULAR SECTION ---
               const SizedBox(height: 16),
               Consumer<CategoryListProvider>(
                 builder: (context, categoryProvider, _) {
-
                   return SectionHeader(
                     name: context.localization.popular,
                     onTapSeeAll: () {
@@ -174,14 +167,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     category: categoryProvider.categories[8],
                   );
                 },
-
               ),
 
-              // --- SPECIAL SECTION ---
               const SizedBox(height: 16),
               Consumer<CategoryListProvider>(
                 builder: (context, categoryProvider, _) {
-
                   return SectionHeader(
                     name: context.localization.special,
                     onTapSeeAll: () {
@@ -203,14 +193,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   return HorizontalProductListView(
                     category: categoryProvider.categories[7],
                   );
-
                 },
               ),
 
               const SizedBox(height: 16),
               Consumer<CategoryListProvider>(
                 builder: (context, categoryProvider, _) {
-
                   return SectionHeader(
                     name: context.localization.newArrival,
                     onTapSeeAll: () {

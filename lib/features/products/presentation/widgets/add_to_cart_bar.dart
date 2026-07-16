@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/constants.dart';
+import '../providers/add_to_cart_provider.dart';
 
 
 class AddToCartBar extends StatelessWidget {
@@ -31,13 +33,22 @@ class AddToCartBar extends StatelessWidget {
               Text('${Constants.takaSing}$price', style: TextTheme.of(context).titleLarge?.copyWith(color: AppColors.themeColor),),
             ],
           ),
-          FilledButton(
-            style: FilledButton.styleFrom(
-                backgroundColor: AppColors.themeColor,
-                fixedSize: Size.fromWidth(120)
-            ),
-
-            onPressed: onTapAddToCart, child: Text("Add To Cart"), )
+          Consumer<AddToCartProvider>(
+            builder: (context, provider, _) {
+              return Visibility(
+                visible: provider.addToCartInProgress == false,
+                replacement: Center(child: CircularProgressIndicator()),
+                child: FilledButton(
+                  
+                  style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.themeColor,
+                      fixedSize: Size.fromWidth(120)
+                  ),
+                
+                  onPressed: onTapAddToCart, child: Text("Add To Cart"), ),
+              );
+            }
+          )
         ],
       ),
     );

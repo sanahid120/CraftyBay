@@ -11,7 +11,7 @@ NetworkCaller getNetworkCaller() {
       Map <String, String> headers = {
         'Content-Type': 'application/json',
         // If you have a token, add it here separately
-        //'token': AuthController.token!
+        'token': AuthController.token!
       };
       if(AuthController.token!=null){
         headers['token'] =  '${AuthController.token}';

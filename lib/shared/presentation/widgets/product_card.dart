@@ -70,7 +70,6 @@ class ProductCard extends StatelessWidget {
                             }
                             return Center(child: CircularProgressIndicator());
                           },
-
                           fit: BoxFit.cover,
                           alignment: Alignment.center,
                         ),

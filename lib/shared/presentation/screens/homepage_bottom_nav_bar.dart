@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/extensions/localization_extension.dart';
-import '../../../features/wishlist/presentation/screens/wish_list_screen.dart';
 
 class HomepageBottomNavBar extends StatefulWidget {
   const HomepageBottomNavBar({super.key});
@@ -41,7 +40,7 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
     HomeScreen(),
     CategoryScreen(),
     CartScreen(),
-    WishListScreen(),
+    SizedBox()
   ];
   /*
   IndexedStack(
@@ -81,9 +80,10 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
                 label: context.localization.cart,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: context.localization.wishlist,
+                icon: Icon(Icons.person),
+                label: context.localization.profile,
               ),
+
             ],
           ),
         );
