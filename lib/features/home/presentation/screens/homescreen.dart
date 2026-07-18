@@ -1,16 +1,11 @@
 import 'package:craftybay/app/app_paths.dart';
-import 'package:craftybay/app/controllers/auth_controller.dart';
-import 'package:craftybay/app/providers/language_provider.dart';
-import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
 import 'package:craftybay/features/category/presentaion/providers/category_list_provider.dart';
 import 'package:craftybay/features/products/presentation/providers/product_list_provider.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../../../../app/app_theme.dart';
 import '../../../../app/extensions/localization_extension.dart';
-import '../../../../app/providers/theme_provider.dart';
 import '../../../products/presentation/screens/product_list_screen.dart';
 import '../widgets/appbar_widget.dart';
 import '../widgets/home_carousel_slider.dart';

@@ -30,7 +30,7 @@ class _IncDecButtonState extends State<IncDecButton> {
             '$quantity',
             style: TextTheme.of(
               context,
-            ).titleLarge?.copyWith(color: Colors.black),
+            ).titleLarge?.copyWith(color: AppColors.themeColor),
           ),
         ),
         _buildButton(Icons.add, () {
