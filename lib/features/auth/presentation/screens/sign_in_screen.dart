@@ -71,8 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             validator: (String? value) {
                               if (value?.trim().isEmpty ?? true) {
                                 return 'Enter your Email';
-                              } else if (EmailValidator.validate(value!) ==
-                                  false) {
+                              } else if (!EmailValidator.validate(value!)) {
                                 return 'Enter a valid email address';
                               }
                               return null;
@@ -187,21 +186,19 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> onLoginButton(BuildContext context) async {
     if (signInFormKey.currentState!.validate()) {
       bool isSuccess = await _signInProvider.signIn(
-        emailController.text,
+        emailController.text.trim(),
         passwordController.text,
       );
-
-
+      if(!mounted) return;
 
       if (isSuccess) {
-
         Navigator.pushNamedAndRemoveUntil(
           context,
           HomepageBottomNavBar.name,
           (_) => false,
         );
       } else {
-        showSnackBarMessage(context, _signInProvider.errorMessage!);
+        showSnackBarMessage(context, _signInProvider.errorMessage?? "Something went wrong! Please try again");
       }
     }
   }

@@ -229,31 +229,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> onTapSignUpButton() async {
-    if (signupFormKey.currentState!.validate()) {
-      bool isSuccess = await _signUpProviders.signUp(
-        SignUpParams(
-          firstName: firstNameController.text,
-          lastName: lastNameController.text,
-          email: emailController.text.trim(),
-          phone: phoneController.text,
-          city: cityController.text,
-          password: passwordController.text,
-        ),
+    final isValid = signupFormKey.currentState?.validate() ?? false;
+
+    if (!isValid) return;
+
+    final email = emailController.text.trim();
+
+    final isSuccess = await _signUpProviders.signUp(
+      SignUpParams(
+        firstName: firstNameController.text.trim(),
+        lastName: lastNameController.text.trim(),
+        email: email,
+        phone: phoneController.text.trim(),
+        city: cityController.text.trim(),
+        password: passwordController.text,
+      ),
+    );
+
+    if (!mounted) return;
+
+    if (!isSuccess) {
+      showSnackBarMessage(
+        context,
+        _signUpProviders.errorMessage ??
+            "Registration failed. Please try again.",
       );
-      if (!mounted) return;
-      if (!isSuccess) {
-        showSnackBarMessage(context, _signUpProviders.errorMessage!);
-      } else {
-        showSnackBarMessage(
-          context,
-          "An OTP has been sent to your email address. Default OTP is 1234.",
-        );
-        Navigator.pushNamed(
-          context,
-          VerifyOtp.name,
-          arguments: emailController.text.trim(),
-        );
-      }
+      return;
     }
+
+    showSnackBarMessage(
+      context,
+      "An OTP has been sent to your email address. Default OTP is 1234.",
+    );
+
+    Navigator.pushNamed(
+      context,
+      VerifyOtp.name,
+      arguments: email,
+    );
   }
 }

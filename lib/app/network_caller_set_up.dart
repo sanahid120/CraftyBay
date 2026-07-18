@@ -2,7 +2,7 @@ import 'package:craftybay/app/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../core/services/network_caller.dart';
-import '../features/auth/presentation/screens/sign_in_screen.dart';
+import '../features/auth/presentation/screens/splash_screen.dart';
 import 'app.dart';
 
 NetworkCaller getNetworkCaller() {
@@ -10,8 +10,7 @@ NetworkCaller getNetworkCaller() {
     headers: ()  {
       Map <String, String> headers = {
         'Content-Type': 'application/json',
-        // If you have a token, add it here separately
-        'token': AuthController.token!
+        'token': AuthController.token ?? '',
       };
       if(AuthController.token!=null){
         headers['token'] =  '${AuthController.token}';
@@ -29,6 +28,7 @@ NetworkCaller getNetworkCaller() {
 Future<void> logout() async {
   if (MyApp.navigatorKey.currentContext != null) {
     Navigator.pushNamedAndRemoveUntil(
-        MyApp.navigatorKey.currentContext!, SignInScreen.name, (route) => false);
+        MyApp.navigatorKey.currentContext!, SplashScreen.name, (route) => false);
   }
+  AuthController.removeUserData();
 }

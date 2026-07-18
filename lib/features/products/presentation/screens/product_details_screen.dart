@@ -33,7 +33,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   String? _selectedSize;
   int _quantity = 1;
 
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
@@ -91,18 +90,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               children: [
                                 Text(
                                   "Description",
-                                  style: TextTheme
-                                      .of(context)
-                                      .titleMedium
+                                  style: TextTheme.of(context).titleMedium
                                       ?.copyWith(color: AppColors.themeColor),
                                 ),
                                 const SizedBox(height: 8),
 
                                 Text(
                                   widget.productDetails.description,
-                                  style: TextTheme
-                                      .of(context)
-                                      .bodyMedium
+                                  style: TextTheme.of(context).bodyMedium
                                       ?.copyWith(color: Colors.grey.shade600),
                                   maxLines: 25,
                                   overflow: TextOverflow.ellipsis,
@@ -146,10 +141,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   );
                   if (isSuccess) {
                     showSnackBarMessage(context, "Product Added to Cart");
-                  }
-                  else {
+                  } else {
                     showSnackBarMessage(
-                        context, _addToCartProvider.errorMessage!);
+                      context,
+                      _addToCartProvider.errorMessage!,
+                    );
                   }
                 }
               },
@@ -159,7 +155,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
     );
   }
-
 
   Widget buildTitleSection(BuildContext context, String title) {
     Random random = Random();
@@ -174,12 +169,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: [
               Text(
                 title,
-                style: TextTheme
-                    .of(
+                style: TextTheme.of(
                   context,
-                )
-                    .titleLarge
-                    ?.copyWith(color: Colors.black87),
+                ).titleLarge?.copyWith(color: Colors.black87),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -192,12 +184,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     },
                     child: Text(
                       'Reviews',
-                      style: TextTheme
-                          .of(
+                      style: TextTheme.of(
                         context,
-                      )
-                          .titleMedium
-                          ?.copyWith(color: AppColors.themeColor),
+                      ).titleMedium?.copyWith(color: AppColors.themeColor),
                     ),
                   ),
 
@@ -207,16 +196,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ],
           ),
         ),
-        IncDecButton(onChange: (int quantity) {_quantity = quantity;}),
+        IncDecButton(
+          onChange: (int quantity) {
+            _quantity = quantity;
+          },
+        ),
       ],
     );
   }
 }
+
 Future<void> onPressedReviewButton(BuildContext context) async {
-  if(await AuthController.isUserLoggedIn()){
-
-  }else{
-
+  if (await AuthController.isUserLoggedIn()) {
+  } else {
     showSnackBarMessage(context, "Please Login First!");
   }
 }

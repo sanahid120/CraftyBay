@@ -9,7 +9,9 @@
   "categories": "বিভাগ ",
   "cart": "কার্ট",
   "profile": "প্রোফাইল",
-  "seeAll": "আরো দেখুন"
+  "seeAll": "আরো দেখুন",
+  "login" : "লগইন",
+  "logout" : "লগআউট"
 
 
 

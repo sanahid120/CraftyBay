@@ -9,5 +9,8 @@
   "categories": "Categories",
   "cart": "Cart",
   "profile": "Profile",
-  "seeAll": "See all"
+  "seeAll": "See all",
+  "login" : "LogIn",
+  "logout" : "LogOut"
+
 }

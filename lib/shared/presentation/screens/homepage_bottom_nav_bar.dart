@@ -5,6 +5,7 @@ import 'package:craftybay/features/category/presentaion/screens/category_screen.
 import 'package:craftybay/features/home/presentation/providers/home_slider_provider.dart';
 import 'package:craftybay/features/home/presentation/screens/HomeScreen.dart';
 import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
+import 'package:craftybay/shared/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,14 +19,10 @@ class HomepageBottomNavBar extends StatefulWidget {
   State<HomepageBottomNavBar> createState() => _HomepageBottomNavBarState();
 }
 
-
 class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
-
   @override
   void initState() {
     // TODO: implement initState
-
-
 
     super.initState();
 
@@ -35,19 +32,6 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
     });
   }
 
-
-  final List<Widget> _screens = [
-    HomeScreen(),
-    CategoryScreen(),
-    CartScreen(),
-    SizedBox()
-  ];
-  /*
-  IndexedStack(
-            index: 0,
-            children: [SizedBox(),SizedBox(),SizedBox(),SizedBox(),],
-          )
-  * */
   @override
   Widget build(BuildContext context) {
     return Consumer<HomepageMainNavProvider>(
@@ -55,7 +39,15 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
         return Scaffold(
           extendBody: false,
 
-          body: _screens[mainNavProvider.selectedIndex],
+          body: IndexedStack(
+            index: mainNavProvider.selectedIndex,
+            children: [
+              HomeScreen(),
+              CategoryScreen(),
+              CartScreen(),
+              ProfileScreen(),
+            ],
+          ),
 
           bottomNavigationBar: BottomNavigationBar(
             onTap: (int index) {
@@ -70,7 +62,10 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
             currentIndex: mainNavProvider.selectedIndex,
             selectedItemColor: AppColors.themeColor,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: context.localization.home),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: context.localization.home,
+              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.dashboard),
                 label: context.localization.categories,
@@ -83,7 +78,6 @@ class _HomepageBottomNavBarState extends State<HomepageBottomNavBar> {
                 icon: Icon(Icons.person),
                 label: context.localization.profile,
               ),
-
             ],
           ),
         );

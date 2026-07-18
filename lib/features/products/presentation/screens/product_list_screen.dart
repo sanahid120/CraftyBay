@@ -57,7 +57,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         body: Consumer<ProductListProvider>(
           builder: (context, _, _) {
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
                 children: [
                   Visibility(

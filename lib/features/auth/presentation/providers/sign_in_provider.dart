@@ -35,10 +35,10 @@ class SignInProvider extends ChangeNotifier {
       await AuthController.saveUserData(userModel, token);
 
       isSuccessful = true;
-      _errorMessage = response.body['msg'];
+      _errorMessage = response.body['msg'] ;
     } else {
       isSuccessful = false;
-      _errorMessage = response.errorMessage;
+      _errorMessage = response.errorMessage ;
     }
     _signInProgress = false;
     notifyListeners();

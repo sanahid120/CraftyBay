@@ -29,11 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isLoggedIn) {
       await AuthController.getUserData();
     }
-    if (!mounted) {
-      return;
-    } else {
-      Navigator.pushReplacementNamed(context, HomepageBottomNavBar.name);
-    }
+
+    Navigator.pushReplacementNamed(context, HomepageBottomNavBar.name);
   }
 
   @override

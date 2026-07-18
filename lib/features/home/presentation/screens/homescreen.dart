@@ -1,4 +1,5 @@
 import 'package:craftybay/app/app_paths.dart';
+import 'package:craftybay/app/controllers/auth_controller.dart';
 import 'package:craftybay/app/providers/language_provider.dart';
 import 'package:craftybay/features/auth/presentation/widgets/app_logo.dart';
 import 'package:craftybay/features/category/presentaion/providers/category_list_provider.dart';
@@ -14,6 +15,7 @@ import '../../../products/presentation/screens/product_list_screen.dart';
 import '../widgets/appbar_widget.dart';
 import '../widgets/home_carousel_slider.dart';
 import '../widgets/home_category_list.dart';
+import '../widgets/homepage_drawer.dart';
 import '../widgets/horizontal_product_list_view.dart';
 import '../widgets/product_search_bar.dart';
 import '../widgets/section_header.dart';
@@ -53,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ]);
     }
+
   }
 
   @override
@@ -67,62 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-      drawer: Drawer(
-        child: Consumer2<ThemeProvider, LanguageProvider>(
-          builder: (context, themeProvider, languageProvider, _) {
-            return ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                DrawerHeader(
-                  decoration: BoxDecoration(color: Colors.grey.withAlpha(50)),
-                  child: AppLogo(),
-                ),
-                ListTile(
-                  leading: themeProvider.currentTheme == AppTheme.lightTheme
-                      ? const Icon(Icons.light_mode)
-                      : Icon(Icons.dark_mode),
-                  title: Text(context.localization.changeTheme),
-                  trailing: Switch.adaptive(
-                    value: themeProvider.currentTheme == AppTheme.lightTheme,
-                    onChanged: (value) {
-                      context.read<ThemeProvider>().currentTheme ==
-                              AppTheme.lightTheme
-                          ? context.read<ThemeProvider>().changeTheme(
-                              AppTheme.darkTheme,
-                            )
-                          : context.read<ThemeProvider>().changeTheme(
-                              AppTheme.lightTheme,
-                            );
-                    },
-                    padding: EdgeInsets.zero,
-                  ),
-                ),
 
-                ListTile(
-                  leading: Icon(Icons.language),
-                  title: Text(context.localization.changeYourLanguage),
-                  trailing: DropdownButton<Locale>(
-                    value: languageProvider.currentLocale,
-                    onChanged: (locale) {
-                      languageProvider.changeLocale(locale!);
-                    },
-                    items: [
-                      DropdownMenuItem(
-                        value: Locale('en'),
-                        child: Text('English'),
-                      ),
-                      DropdownMenuItem(
-                        value: Locale('bn'),
-                        child: Text('বাংলা'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+      drawer: HomepageDrawer(),
 
       body: SingleChildScrollView(
         child: Padding(

@@ -26,7 +26,7 @@ class SignUpProviders extends ChangeNotifier {
 
     if (response.isSuccess) {
       isSuccessful = true;
-      _errorMessage = null;
+      _errorMessage = response.body['msg'];
     } else {
       isSuccessful = false;
       _errorMessage = response.errorMessage;
