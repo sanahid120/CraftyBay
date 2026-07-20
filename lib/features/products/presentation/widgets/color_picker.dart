@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../app/app_theme.dart';
 
 class ColorPicker extends StatefulWidget {
   const ColorPicker({
@@ -48,7 +49,7 @@ class _ColorPickerState extends State<ColorPicker> {
                   decoration: BoxDecoration(
                     color: _selectedColor == widget.colors[index]
                         ? AppColors.themeColor
-                        : Colors.white,
+                        : Colors.white60,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: _selectedColor == widget.colors[index]

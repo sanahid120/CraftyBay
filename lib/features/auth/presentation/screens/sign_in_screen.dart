@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../admin/presentation/screens/admin_homepage.dart';
 import '../../../../shared/presentation/widgets/snackbar_msg.dart';
 import '../providers/sign_in_provider.dart';
 
@@ -184,7 +185,17 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<void> onLoginButton(BuildContext context) async {
-    if (signInFormKey.currentState!.validate()) {
+    String adminEmail = "admin@gmail.com";
+    String adminPassword = "123456";
+
+    if (emailController.text.trim() == adminEmail && passwordController.text == adminPassword) {
+
+      Navigator.pushNamedAndRemoveUntil(context, AdminHomepage.name , (_)=>false,);
+      return;
+    }
+
+    else if (signInFormKey.currentState!.validate()) {
+
       bool isSuccess = await _signInProvider.signIn(
         emailController.text.trim(),
         passwordController.text,

@@ -1,7 +1,9 @@
+import 'package:craftybay/admin/presentation/screens/add_new_product.dart';
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
 import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import '../admin/presentation/screens/admin_homepage.dart';
 import '../features/auth/presentation/screens/homepage.dart';
 import '../features/auth/presentation/screens/sign_in_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
@@ -30,25 +32,30 @@ class AppRoutes {
         break;
       case VerifyOtp.name:
         final email = settings.arguments as String;
-        widget = VerifyOtp(email: email,);
-      break;
+        widget = VerifyOtp(email: email);
+        break;
       case HomepageBottomNavBar.name:
         widget = HomepageBottomNavBar();
         break;
       case ProductListScreen.name:
         final CategoryModel category = settings.arguments as CategoryModel;
-        widget = ProductListScreen(category: category,);
+        widget = ProductListScreen(category: category);
         break;
       case CategoryScreen.name:
         widget = CategoryScreen();
         break;
       case ProductDetailsScreen.name:
         final ProductModel product = settings.arguments as ProductModel;
-        widget = ProductDetailsScreen(productDetails: product,);
+        widget = ProductDetailsScreen(productDetails: product);
         break;
+      case AdminHomepage.name:
+        widget = AdminHomepage();
+        break;
+      case AddNewProduct.name:
+        widget = AddNewProduct();
+        break;
+
       default:
-
-
     }
 
     return MaterialPageRoute(builder: (context) => widget);
