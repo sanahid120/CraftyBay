@@ -1,9 +1,9 @@
-
 import 'package:craftybay/app/extensions/localization_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../shared/presentation/provider/homepage_main_nav_provider.dart';
+import '../../../payment/presentation/screens/payment_options.dart';
 import '../widgets/cart_item.dart';
 import '../widgets/total_price_and_checkout_section.dart';
 
@@ -44,12 +44,18 @@ class _CartScreenState extends State<CartScreen> {
                 },
               ),
             ),
-            TotalPriceAndCheckoutSection(totalPrice: 120, onTapCheckout: () {}),
+            TotalPriceAndCheckoutSection(
+              totalPrice: 120,
+              onTapCheckout: () {
+                Navigator.pushNamed(context, PaymentOptions.name);
+              },
+            ),
           ],
         ),
       ),
     );
   }
+
 
   void onBackButtonPressed(BuildContext context) {
     context.read<HomepageMainNavProvider>().moveToHomepage();

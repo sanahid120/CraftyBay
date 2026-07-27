@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../../../../app/extensions/localization_extension.dart';
+import '../../../chat/presentation/screens/chat_screen.dart';
 import '../../../products/presentation/screens/product_list_screen.dart';
 import '../widgets/appbar_widget.dart';
 import '../widgets/home_carousel_slider.dart';
@@ -50,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ]);
     }
-
   }
 
   @override
@@ -65,31 +65,32 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-
       drawer: HomepageDrawer(),
 
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              const SizedBox(height: 16),
-              const ProductSearchBar(),
-              const SizedBox(height: 16),
-              const HomeCarouselSlider(),
-              const SizedBox(height: 16),
-              SectionHeader(
-                name: context.localization.allCategories,
-                onTapSeeAll: () =>
-                    context.read<HomepageMainNavProvider>().moveToCategory(),
-              ),
-              const SizedBox(height: 16),
-              const HomeCategoryList(),
+          child: Consumer<CategoryListProvider>(
+            builder: (context, categoryProvider, _) {
+              return Column(
+                children: [
+                  const SizedBox(height: 16),
+                  const ProductSearchBar(),
+                  const SizedBox(height: 16),
+                  const HomeCarouselSlider(),
+                  const SizedBox(height: 16),
+                  SectionHeader(
+                    name: context.localization.allCategories,
+                    onTapSeeAll: () => context
+                        .read<HomepageMainNavProvider>()
+                        .moveToCategory(),
+                  ),
+                  const SizedBox(height: 16),
+                  const HomeCategoryList(),
 
-              const SizedBox(height: 16),
-              Consumer<CategoryListProvider>(
-                builder: (context, categoryProvider, _) {
-                  return SectionHeader(
+                  const SizedBox(height: 16),
+
+                  SectionHeader(
                     name: context.localization.popular,
                     onTapSeeAll: () {
                       Navigator.pushNamed(
@@ -98,25 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         arguments: categoryProvider.categories[8],
                       );
                     },
-                  );
-                },
-              ),
-              const SizedBox(height: 8),
-              Consumer<CategoryListProvider>(
-                builder: (context, categoryProvider, _) {
-                  if (categoryProvider.categories.length < 9) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return HorizontalProductListView(
-                    category: categoryProvider.categories[8],
-                  );
-                },
-              ),
+                  ),
 
-              const SizedBox(height: 16),
-              Consumer<CategoryListProvider>(
-                builder: (context, categoryProvider, _) {
-                  return SectionHeader(
+                  const SizedBox(height: 8),
+                  categoryProvider.categories.length < 9
+                      ? Center(child: CircularProgressIndicator())
+                      : HorizontalProductListView(
+                          category: categoryProvider.categories[8],
+                        ),
+
+                  const SizedBox(height: 16),
+                  SectionHeader(
                     name: context.localization.special,
                     onTapSeeAll: () {
                       Navigator.pushNamed(
@@ -125,25 +118,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         arguments: categoryProvider.categories[7],
                       );
                     },
-                  );
-                },
-              ),
-              const SizedBox(height: 8),
-              Consumer<CategoryListProvider>(
-                builder: (context, categoryProvider, _) {
-                  if (categoryProvider.categories.length < 9) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return HorizontalProductListView(
-                    category: categoryProvider.categories[7],
-                  );
-                },
-              ),
+                  ),
 
-              const SizedBox(height: 16),
-              Consumer<CategoryListProvider>(
-                builder: (context, categoryProvider, _) {
-                  return SectionHeader(
+                  const SizedBox(height: 8),
+                  categoryProvider.categories.length < 9
+                      ? Center(child: CircularProgressIndicator())
+                      : HorizontalProductListView(
+                          category: categoryProvider.categories[7],
+                        ),
+
+                  const SizedBox(height: 16),
+                  SectionHeader(
                     name: context.localization.newArrival,
                     onTapSeeAll: () {
                       Navigator.pushNamed(
@@ -152,23 +137,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         arguments: categoryProvider.categories[5],
                       );
                     },
-                  );
-                },
-              ),
-              const SizedBox(height: 8),
-              Consumer<CategoryListProvider>(
-                builder: (context, categoryProvider, _) {
-                  if (categoryProvider.categories.length < 9) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return HorizontalProductListView(
-                    category: categoryProvider.categories[5],
-                  );
-                },
-              ),
-            ],
+                  ),
+                  const SizedBox(height: 8),
+                  categoryProvider.categories.length < 9
+                      ? Center(child: CircularProgressIndicator())
+                      : HorizontalProductListView(
+                          category: categoryProvider.categories[5],
+                        ),
+                ],
+              );
+            },
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {Navigator.pushNamed(context, ChatScreen.name);},
+        isExtended: false,
+        child: Icon(Icons.wechat_outlined,size: 48,),
       ),
     );
   }

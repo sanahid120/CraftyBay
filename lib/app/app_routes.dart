@@ -1,6 +1,8 @@
 import 'package:craftybay/admin/presentation/screens/add_new_product.dart';
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
+import 'package:craftybay/features/chat/presentation/screens/chat_screen.dart';
+import 'package:craftybay/features/payment/presentation/screens/payment_options.dart';
 import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import '../admin/presentation/screens/admin_homepage.dart';
@@ -53,6 +55,12 @@ class AppRoutes {
         break;
       case AddNewProduct.name:
         widget = AddNewProduct();
+        break;
+      case PaymentOptions.name:
+        widget = PaymentOptions();
+        break;
+      case ChatScreen.name:
+        widget = ChatScreen();
         break;
 
       default:

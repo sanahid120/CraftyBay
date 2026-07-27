@@ -15,13 +15,12 @@ class CategoryCard extends StatelessWidget {
         onTapCategory(context, category);
       },
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: .center,
         crossAxisAlignment: .center,
-        spacing: 4,
         children: [
           Container(
-            width: 75,
+            width: 85,
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: AppColors.themeColor.withAlpha(30),
@@ -29,9 +28,10 @@ class CategoryCard extends StatelessWidget {
             ),
             child: Image.network(
               category.icon,
-              cacheHeight: 50,
-              cacheWidth: 50,
-              fit: BoxFit.cover,
+              cacheHeight: 100,
+              cacheWidth: 100,
+              fit: BoxFit.contain,
+
               errorBuilder: (context, error, stackTrace) {
                 return Icon(Icons.error, color: AppColors.themeColor, size: 32);
               },
@@ -60,9 +60,9 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  void onTapCategory(BuildContext context, CategoryModel category ) {
+  void onTapCategory(BuildContext context, CategoryModel category) {
     Navigator.of(
       context,
-    ).pushNamed(ProductListScreen.name,  arguments: category, );
+    ).pushNamed(ProductListScreen.name, arguments: category);
   }
 }

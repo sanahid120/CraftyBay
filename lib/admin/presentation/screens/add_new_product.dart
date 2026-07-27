@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:craftybay/app/app_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -44,28 +45,42 @@ class _AddNewProductState extends State<AddNewProduct> {
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
             ),
-            child:
-              Column(
-                children: [
-                  
-                  ]
-              )
+            child: Column(
+              crossAxisAlignment: .center,
+              children: [
+                Image.asset(AssetPaths.noImagePng, height: 100, width: 100),
+                Text(
+                  "Upload Product Images",
+                  style: TextStyle(color: Colors.black, fontSize: 17),
+                ),
+                Text(
+                  "JPG, PNG . Up to 5 Images",
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: FilledButton(
+                    onPressed: () {
+                      onPressedImagePicker(context);
+                    },
+                    child: Text("Choose Images"),
+                  ),
+                ),
+              ],
+            ),
           ),
-          
+
           const SizedBox(height: 50),
-          FilledButton(
-            onPressed: () {
-              onPressedImagePicker(context);
-            },
-            child: const Text("Select Image"),
-          ),
+
           const SizedBox(height: 20),
 
           // FIX: Add a conditional check here
           if (images != null && images!.isNotEmpty)
             SizedBox(
-              height: 200, // Give it a fixed height to avoid layout errors
-              child: Image.file(File(images![0].path), fit: BoxFit.contain),
+              height: 400,
+              width:500,
+              // Give it a fixed height to avoid layout errors
+              child: Center(child: Image.file(File(images![0].path), fit: BoxFit.contain,cacheHeight: 400,cacheWidth: 500,)),
             )
           else
             const Text("No image selected"), // Placeholder when list is empty
@@ -87,7 +102,7 @@ class _AddNewProductState extends State<AddNewProduct> {
               final List<XFile> pickedImages = await picker.pickMultiImage(
                 limit: 4,
               );
-              if (mounted) return;
+              if (!mounted) return;
               if (pickedImages.isNotEmpty) {
                 setState(() {
                   images = pickedImages;
@@ -104,11 +119,16 @@ class _AddNewProductState extends State<AddNewProduct> {
               final XFile? pickedImage = await picker.pickImage(
                 source: ImageSource.camera,
               );
-              if (mounted) return;
+              if (!mounted) return;
+              if(pickedImage != null){
+                images = [pickedImage];
+              }
+              else{
+                images = [];
+              }
               setState(() {
-                images?[0] = pickedImage!;
+
               });
-              Navigator.pop(context);
             },
           ),
         ],
@@ -116,4 +136,3 @@ class _AddNewProductState extends State<AddNewProduct> {
     );
   }
 }
-

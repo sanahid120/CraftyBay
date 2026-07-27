@@ -21,7 +21,7 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 220,
+            height: 250,
             viewportFraction: 1,
             onPageChanged: (index, reason) {
               _currentIndex.value = index;
@@ -54,7 +54,7 @@ class _ProductDetailsImageSliderState extends State<ProductDetailsImageSlider> {
                           }
                           return Center(child: CircularProgressIndicator());
                         },
-                        fit: BoxFit.scaleDown,
+                        fit: BoxFit.cover,
                         alignment: Alignment.center,
                       ),
                     );

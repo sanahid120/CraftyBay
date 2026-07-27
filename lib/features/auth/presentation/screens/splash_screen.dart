@@ -1,4 +1,7 @@
 import 'package:craftybay/admin/presentation/screens/add_new_product.dart';
+import 'package:craftybay/features/payment/presentation/screens/payment_options.dart';
+import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
+import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_logo.dart';
@@ -23,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigateToNextScreen() async {
     await Future.delayed(Duration(seconds: 3));
     if(!mounted) return;
-    Navigator.pushReplacementNamed(context, AddNewProduct.name);
+    Navigator.pushReplacementNamed(context, HomepageBottomNavBar.name);
   }
 
   @override
