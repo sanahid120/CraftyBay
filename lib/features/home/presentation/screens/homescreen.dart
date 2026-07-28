@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 16),
                   const ProductSearchBar(),
                   const SizedBox(height: 16),
-                  const HomeCarouselSlider(),
+                  HomeCarouselSlider(),
                   const SizedBox(height: 16),
                   SectionHeader(
                     name: context.localization.allCategories,

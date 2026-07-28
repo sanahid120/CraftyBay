@@ -55,8 +55,8 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                             fit: BoxFit.cover,
                             width: double.maxFinite,
                             height: double.maxFinite,
-                            cacheHeight: 550,
-                            cacheWidth: 1000,
+                            cacheHeight: 220,
+                            cacheWidth: 550,
 
                             loadingBuilder: (context, child, loadingProgress) {
                               if (loadingProgress == null) return child;

@@ -1,6 +1,3 @@
-import 'package:craftybay/admin/presentation/screens/add_new_product.dart';
-import 'package:craftybay/features/payment/presentation/screens/payment_options.dart';
-import 'package:craftybay/shared/presentation/provider/homepage_main_nav_provider.dart';
 import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 

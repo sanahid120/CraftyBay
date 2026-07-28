@@ -4,7 +4,7 @@ import '../../../app/app_colors.dart';
 
 class FavIcon extends StatelessWidget {
   const FavIcon({
-    super.key, required this.onTap
+    super.key, required this.onTap,
   });
   final VoidCallback onTap;
 
@@ -15,10 +15,10 @@ class FavIcon extends StatelessWidget {
       child: Container(
         padding: .all(2),
         decoration: BoxDecoration(
-          color: AppColors.themeColor.withAlpha(90),
+          color: AppColors.themeColor,
           borderRadius: .circular(4),
         ),
-        child: Icon(Icons.favorite, color: Colors.white, size: 22),
+        child: Icon(Icons.favorite, color: Colors.white, size: 22,),
       ),
     );
   }

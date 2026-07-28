@@ -1,7 +1,6 @@
 import 'package:craftybay/admin/presentation/screens/add_new_product.dart';
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:craftybay/features/auth/presentation/screens/verify_otp.dart';
-import 'package:craftybay/features/chat/presentation/screens/chat_screen.dart';
 import 'package:craftybay/features/payment/presentation/screens/payment_options.dart';
 import 'package:craftybay/shared/presentation/screens/homepage_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import '../features/auth/presentation/screens/sign_in_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/category/data/models/category_model.dart';
 import '../features/category/presentaion/screens/category_screen.dart';
+import '../features/chat/presentation/screens/chat_screen.dart';
 import '../features/products/data/model/product_model.dart';
 import '../features/products/presentation/screens/product_details_screen.dart';
 import '../features/products/presentation/screens/product_list_screen.dart';

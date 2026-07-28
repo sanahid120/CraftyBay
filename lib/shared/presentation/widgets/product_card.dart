@@ -99,7 +99,7 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                   ProductRating(rating: d.toStringAsFixed(1) ),
-                  FavIcon(onTap: () {}),
+                  FavIcon(onTap:(){}),
                 ],
               ),
             ),
