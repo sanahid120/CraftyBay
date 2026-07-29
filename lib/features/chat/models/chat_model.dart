@@ -1,4 +1,6 @@
-import 'package:craftybay/features/chat/presentation/models/chat_entity.dart';
+
+
+import 'chat_entity.dart';
 
 class ChatModel extends ChatEntity {
   const ChatModel({
@@ -37,7 +39,6 @@ class ChatModel extends ChatEntity {
     );
   }
 
-  /// Used when sending messages to the chat API.
   Map<String, dynamic> toApiJson() {
     return {
       'role': role,
@@ -45,7 +46,6 @@ class ChatModel extends ChatEntity {
     };
   }
 
-  /// Used if you want to save the message locally.
   Map<String, dynamic> toJson() {
     return {
       'role': role,
@@ -54,7 +54,6 @@ class ChatModel extends ChatEntity {
     };
   }
 
-  /// Used when loading locally saved messages.
   factory ChatModel.fromLocalJson(Map<String, dynamic> json) {
     return ChatModel(
       role: json['role']?.toString() ?? 'assistant',

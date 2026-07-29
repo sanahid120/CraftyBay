@@ -57,7 +57,8 @@ class AppRoutes {
         widget = AddNewProduct();
         break;
       case PaymentOptions.name:
-        widget = PaymentOptions();
+        final ProductModel product = settings.arguments as ProductModel;
+        widget = PaymentOptions(productDetails: product);
         break;
       case ChatScreen.name:
         widget = ChatScreen();

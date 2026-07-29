@@ -45,7 +45,7 @@ class AddToCartBar extends StatelessWidget {
                       fixedSize: Size.fromWidth(120)
                   ),
                 
-                  onPressed: onTapAddToCart, child: Text("Add To Cart"), ),
+                  onPressed: onTapAddToCart, child: Text("Checkout"), ),
               );
             }
           )

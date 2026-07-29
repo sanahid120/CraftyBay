@@ -5,7 +5,7 @@ import 'package:craftybay/core/services/network_caller.dart';
 import 'package:craftybay/features/chat/service/model_caller.dart';
 import 'package:flutter/material.dart';
 
-import '../models/chat_model.dart';
+import '../../models/chat_model.dart';
 
 class ChatProvider extends ChangeNotifier {
   final List<ChatModel> _messages = [
@@ -56,7 +56,7 @@ class ChatProvider extends ChangeNotifier {
           'model': 'openai/gpt-4o',
           'messages': _messages.map((message) => message.toApiJson()).toList(),
           'temperature': 0,
-          'max_tokens': 50,
+          'max_tokens': 150,
         },
       );
 

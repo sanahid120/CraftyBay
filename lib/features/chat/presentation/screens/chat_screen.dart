@@ -1,9 +1,9 @@
 import 'package:craftybay/app/app_colors.dart';
-import 'package:craftybay/features/chat/presentation/models/chat_model.dart';
 import 'package:craftybay/features/chat/presentation/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/chat_model.dart';
 import '../widgets/chat_bubble.dart';
 import '../widgets/date_header.dart';
 import '../widgets/typing_indicator.dart';
@@ -86,11 +86,18 @@ class _ChatScreenState extends State<ChatScreen> {
               },
               child: const Text('Cancel'),
             ),
-            FilledButton(
-              onPressed: () {
-                Navigator.pop(dialogContext, true);
-              },
-              child: const Text('Clear'),
+            SizedBox(
+              width: 100,
+              child: FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pop(dialogContext, true);
+                },
+                child: const Text('Clear'),
+              ),
             ),
           ],
         );
@@ -197,7 +204,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 value: 'clear',
                 child: Row(
                   children: [
-                    Icon(Icons.delete_outline),
+                    Icon(Icons.delete_outline,color: Colors.red,),
                     SizedBox(width: 10),
                     Text('Clear chat'),
                   ],

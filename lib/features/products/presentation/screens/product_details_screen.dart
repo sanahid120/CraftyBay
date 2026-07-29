@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:craftybay/features/payment/presentation/screens/payment_options.dart';
 import 'package:craftybay/features/products/data/model/product_model.dart';
 import 'package:craftybay/features/products/presentation/widgets/size_picker.dart';
 import 'package:craftybay/shared/presentation/widgets/fav_icon.dart';
@@ -130,24 +131,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   }
                 }
 
-                if (mounted) {
-                  bool isSuccess = await _addToCartProvider.addToCart(
-                    CartModel(
-                      product: widget.productDetails.id,
-                      color: _selectedColor ?? '',
-                      size: _selectedSize ?? '',
-                      quantity: _quantity,
-                    ),
-                  );
-                  if (isSuccess) {
-                    showSnackBarMessage(context, "Product Added to Cart");
-                  } else {
-                    showSnackBarMessage(
-                      context,
-                      _addToCartProvider.errorMessage!,
-                    );
-                  }
-                }
+                // if (mounted) {
+                //   bool isSuccess = await _addToCartProvider.addToCart(
+                //     CartModel(
+                //       product: widget.productDetails.id,
+                //       color: _selectedColor ?? '',
+                //       size: _selectedSize ?? '',
+                //       quantity: _quantity,
+                //     ),
+                //   );
+
+                showSnackBarMessage(context, "Proceeds to Checkout...");
+                await Future.delayed(Duration(seconds: 1));
+                Navigator.pushNamed(context, PaymentOptions.name, arguments: widget.productDetails);
               },
             ),
           ],
